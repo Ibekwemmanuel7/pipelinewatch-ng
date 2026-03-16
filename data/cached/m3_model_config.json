@@ -1,0 +1,24 @@
+{
+  "feature_cols": [
+    "VV",
+    "VH",
+    "dark_spot_mask",
+    "dark_spot_magnitude",
+    "SAR_change_dB",
+    "new_spill_mask",
+    "chronic_spill_mask",
+    "NDVI",
+    "NDWI",
+    "NDMI",
+    "NDVI_change"
+  ],
+  "model_version": "1.0",
+  "trained": "2026-03-15T21:22:10.793412",
+  "n_samples": 270,
+  "cv_accuracy": 0.981,
+  "risk_tiers": {
+    "LOW": 267,
+    "HIGH": 2,
+    "MEDIUM": 1
+  }
+}
