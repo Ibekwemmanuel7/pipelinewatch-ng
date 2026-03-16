@@ -7,7 +7,7 @@
 [![Google Earth Engine](https://img.shields.io/badge/Google%20Earth%20Engine-Powered-green.svg)](https://earthengine.google.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> Nigeria loses an estimated **150,000+ barrels per day** to crude oil theft. The Niger Delta's mangrove creek terrain makes ground surveillance nearly impossible. PipelineWatch-NG uses free space-based sensors to detect oil spills, illegal refineries, and suspicious activity — entirely from the cloud, with zero satellite downloads.
+> Nigeria loses an estimated **150,000+ barrels per day** to crude oil theft. The Niger Delta's mangrove creek terrain makes ground surveillance nearly impossible. PipelineWatch-NG uses free space-based sensors to detect oil spills, illegal refineries, and suspicious activity - entirely from the cloud, with zero satellite downloads.
 
 ---
 
