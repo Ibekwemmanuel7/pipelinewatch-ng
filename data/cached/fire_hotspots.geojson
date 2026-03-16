@@ -1,0 +1,1122 @@
+{
+  "type": "FeatureCollection",
+  "columns": {
+    "T21_max_K": "Object",
+    "T21_mean_K": "Object",
+    "confidence": "String",
+    "count": "Long<0, 4294967295>",
+    "fire_count": "Object",
+    "label": "Integer",
+    "likely_source": "String",
+    "signal_type": "String",
+    "system:index": "String"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.504925551130485,
+          5.086710296326791
+        ]
+      },
+      "id": "+1931+1510",
+      "properties": {
+        "T21_max_K": 349.29998779296875,
+        "T21_mean_K": 330.33613175567456,
+        "confidence": "nominal",
+        "count": 4,
+        "fire_count": 2.850495804729214,
+        "label": 344,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.508775473776712,
+          5.711600865842433
+        ]
+      },
+      "id": "+1933+1698",
+      "properties": {
+        "T21_max_K": 336,
+        "T21_mean_K": 321.4685985135932,
+        "confidence": "nominal",
+        "count": 14,
+        "fire_count": 3.5626326963906583,
+        "label": 331,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.508294233445934,
+          5.795817923728638
+        ]
+      },
+      "id": "+1933+1721",
+      "properties": {
+        "T21_max_K": 338.20001220703125,
+        "T21_mean_K": 327.73333740234375,
+        "confidence": "nominal",
+        "count": 12,
+        "fire_count": 3,
+        "label": 338,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.520084621550002,
+          5.688020089634295
+        ]
+      },
+      "id": "+1936+1689",
+      "properties": {
+        "T21_max_K": 335.3999938964844,
+        "T21_mean_K": 326.1000061035156,
+        "confidence": "nominal",
+        "count": 9,
+        "fire_count": 3,
+        "label": 335,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.518342199662702,
+          5.700797850141168
+        ]
+      },
+      "id": "+1936+1694",
+      "properties": {
+        "T21_max_K": 336,
+        "T21_mean_K": 326.11543623898007,
+        "confidence": "nominal",
+        "count": 29,
+        "fire_count": 5.846859562455894,
+        "label": 336,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.520084621550002,
+          5.716653889315605
+        ]
+      },
+      "id": "+1936+1698",
+      "properties": {
+        "T21_max_K": 333.3999938964844,
+        "T21_mean_K": 320.9250030517578,
+        "confidence": "nominal",
+        "count": 12,
+        "fire_count": 8,
+        "label": 333,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.52345330386545,
+          5.762131100574156
+        ]
+      },
+      "id": "+1938+1713",
+      "properties": {
+        "T21_max_K": 346.20001220703125,
+        "T21_mean_K": 324.44508261528966,
+        "confidence": "nominal",
+        "count": 35,
+        "fire_count": 4.26713780918728,
+        "label": 346,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.521768962707727,
+          5.091763319799963
+        ]
+      },
+      "id": "+1939+1513",
+      "properties": {
+        "T21_max_K": 349.29998779296875,
+        "T21_mean_K": 334.207280250112,
+        "confidence": "nominal",
+        "count": 40,
+        "fire_count": 3,
+        "label": 349,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.533559350811795,
+          5.721706912788777
+        ]
+      },
+      "id": "+1941+1701",
+      "properties": {
+        "T21_max_K": 348.8999938964844,
+        "T21_mean_K": 324.4062272897458,
+        "confidence": "nominal",
+        "count": 35,
+        "fire_count": 8.93992932862191,
+        "label": 348,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.534631204275801,
+          5.655864485714108
+        ]
+      },
+      "id": "+1943+1681",
+      "properties": {
+        "T21_max_K": 342.70001220703125,
+        "T21_mean_K": 317.44940545210636,
+        "confidence": "nominal",
+        "count": 44,
+        "fire_count": 9.102328863796751,
+        "label": 342,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.540296715442691,
+          5.671176678057054
+        ]
+      },
+      "id": "+1943+1684",
+      "properties": {
+        "T21_max_K": 330.6000061035156,
+        "T21_mean_K": 320.6114676431717,
+        "confidence": "nominal",
+        "count": 15,
+        "fire_count": 3.7328621908127215,
+        "label": 330,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.5392512623103105,
+          5.7081160220678315
+        ]
+      },
+      "id": "+1943+1698",
+      "properties": {
+        "T21_max_K": 348.8999938964844,
+        "T21_mean_K": 329.6142619073728,
+        "confidence": "nominal",
+        "count": 29,
+        "fire_count": 5.218926553672317,
+        "label": 345,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.53945454486383,
+          5.734339471471708
+        ]
+      },
+      "id": "+1943+1703",
+      "properties": {
+        "T21_max_K": 348.8999938964844,
+        "T21_mean_K": 325.6131071939759,
+        "confidence": "nominal",
+        "count": 20,
+        "fire_count": 5.302901627742393,
+        "label": 337,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.553771444704484,
+          5.716653889315605
+        ]
+      },
+      "id": "+1946+1698",
+      "properties": {
+        "T21_max_K": 340.1000061035156,
+        "T21_mean_K": 324.8249969482422,
+        "confidence": "nominal",
+        "count": 12,
+        "fire_count": 3.5,
+        "label": 340,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.693571760795585,
+          5.462318374499266
+        ]
+      },
+      "id": "+1987+1622",
+      "properties": {
+        "T21_max_K": 330.70001220703125,
+        "T21_mean_K": 319.4783251763065,
+        "confidence": "nominal",
+        "count": 6,
+        "fire_count": 2.8563340410474165,
+        "label": 330,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.713573312043558,
+          5.524428454690342
+        ]
+      },
+      "id": "+1992+1642",
+      "properties": {
+        "T21_max_K": 334.29998779296875,
+        "T21_mean_K": 329.81544336333775,
+        "confidence": "nominal",
+        "count": 16,
+        "fire_count": 2.7791107974594214,
+        "label": 334,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.732311607423239,
+          5.600434349432642
+        ]
+      },
+      "id": "+2000+1664",
+      "properties": {
+        "T21_max_K": 335.70001220703125,
+        "T21_mean_K": 319.8199708756626,
+        "confidence": "nominal",
+        "count": 25,
+        "fire_count": 3.06148409893993,
+        "label": 335,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.779473159839514,
+          5.021020991175551
+        ]
+      },
+      "id": "+2013+1491",
+      "properties": {
+        "T21_max_K": 334.5,
+        "T21_mean_K": 326.4666748046875,
+        "confidence": "nominal",
+        "count": 9,
+        "fire_count": 3,
+        "label": 334,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.813159982993996,
+          5.273672164834166
+        ]
+      },
+      "id": "+2024+1567",
+      "properties": {
+        "T21_max_K": 341,
+        "T21_mean_K": 325.49020344764523,
+        "confidence": "nominal",
+        "count": 25,
+        "fire_count": 5.998586572438164,
+        "label": 341,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.813159982993996,
+          5.290515576411408
+        ]
+      },
+      "id": "+2024+1572",
+      "properties": {
+        "T21_max_K": 332,
+        "T21_mean_K": 322.4451252967646,
+        "confidence": "nominal",
+        "count": 25,
+        "fire_count": 4.791519434628976,
+        "label": 332,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.840914995984319,
+          5.378247781061558
+        ]
+      },
+      "id": "+2032+1600",
+      "properties": {
+        "T21_max_K": 347.6000061035156,
+        "T21_mean_K": 319.3767367394001,
+        "confidence": "nominal",
+        "count": 46,
+        "fire_count": 4.842998585572843,
+        "label": 347,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.870427582356616,
+          5.56674752627816
+        ]
+      },
+      "id": "+2040+1654",
+      "properties": {
+        "T21_max_K": 330.79998779296875,
+        "T21_mean_K": 322.29998779296875,
+        "confidence": "nominal",
+        "count": 15,
+        "fire_count": 4,
+        "label": 330,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.871550476461765,
+          5.548262961778009
+        ]
+      },
+      "id": "+2045+1649",
+      "properties": {
+        "T21_max_K": 332.5,
+        "T21_mean_K": 326.41059177387876,
+        "confidence": "nominal",
+        "count": 39,
+        "fire_count": 3.0488668555240794,
+        "label": 332,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.887922996962653,
+          5.211949211441438
+        ]
+      },
+      "id": "+2046+1550",
+      "properties": {
+        "T21_max_K": 336.70001220703125,
+        "T21_mean_K": 329.5184381775937,
+        "confidence": "nominal",
+        "count": 31,
+        "fire_count": 3.021186440677966,
+        "label": 336,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.887270993933857,
+          5.56674752627816
+        ]
+      },
+      "id": "+2047+1654",
+      "properties": {
+        "T21_max_K": 331.3999938964844,
+        "T21_mean_K": 323.6000061035156,
+        "confidence": "nominal",
+        "count": 35,
+        "fire_count": 4,
+        "label": 331,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.947907275611924,
+          5.029442696964171
+        ]
+      },
+      "id": "+2063+1493",
+      "properties": {
+        "T21_max_K": 341.79998779296875,
+        "T21_mean_K": 329.1141371706699,
+        "confidence": "nominal",
+        "count": 6,
+        "fire_count": 2.8609929078014185,
+        "label": 341,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.947907275611924,
+          5.046286108541413
+        ]
+      },
+      "id": "+2063+1498",
+      "properties": {
+        "T21_max_K": 341.79998779296875,
+        "T21_mean_K": 324.6749877929687,
+        "confidence": "nominal",
+        "count": 6,
+        "fire_count": 3.7219858156028374,
+        "label": 341,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          6.98327843992413,
+          5.3039903056732
+        ]
+      },
+      "id": "+2073+1575",
+      "properties": {
+        "T21_max_K": 346.29998779296875,
+        "T21_mean_K": 329.1784025220607,
+        "confidence": "nominal",
+        "count": 6,
+        "fire_count": 2.8563340410474165,
+        "label": 346,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.000121851501372,
+          5.3039903056732
+        ]
+      },
+      "id": "+2078+1577",
+      "properties": {
+        "T21_max_K": 346.29998779296875,
+        "T21_mean_K": 324.09217440314274,
+        "confidence": "nominal",
+        "count": 14,
+        "fire_count": 3.7841472045293703,
+        "label": 346,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.019997077162516,
+          5.309380197377917
+        ]
+      },
+      "id": "+2083+1580",
+      "properties": {
+        "T21_max_K": 331.3999938964844,
+        "T21_mean_K": 324.46934163469086,
+        "confidence": "nominal",
+        "count": 25,
+        "fire_count": 3.5467422096317276,
+        "label": 330,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.025386968867233,
+          5.31241201146182
+        ]
+      },
+      "id": "+2086+1577",
+      "properties": {
+        "T21_max_K": 331.3999938964844,
+        "T21_mean_K": 326.1867624774533,
+        "confidence": "nominal",
+        "count": 6,
+        "fire_count": 2.9305949008498584,
+        "label": 331,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.052336427390819,
+          5.371363951982164
+        ]
+      },
+      "id": "+2096+1597",
+      "properties": {
+        "T21_max_K": 330.79998779296875,
+        "T21_mean_K": 323.1666564941406,
+        "confidence": "nominal",
+        "count": 49,
+        "fire_count": 3,
+        "label": 330,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.0590737920217155,
+          5.2298792947333395
+        ]
+      },
+      "id": "+2098+1553",
+      "properties": {
+        "T21_max_K": 338.29998779296875,
+        "T21_mean_K": 328.70001220703125,
+        "confidence": "nominal",
+        "count": 21,
+        "fire_count": 3,
+        "label": 338,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.067495497810335,
+          5.2450383651528565
+        ]
+      },
+      "id": "+2098+1557",
+      "properties": {
+        "T21_max_K": 338.29998779296875,
+        "T21_mean_K": 330.9398071764212,
+        "confidence": "nominal",
+        "count": 4,
+        "fire_count": 2.7183297947629153,
+        "label": 338,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.0792858859144046,
+          5.2450383651528565
+        ]
+      },
+      "id": "+2103+1557",
+      "properties": {
+        "T21_max_K": 331.70001220703125,
+        "T21_mean_K": 328.45017443432687,
+        "confidence": "nominal",
+        "count": 10,
+        "fire_count": 2.8611898016997164,
+        "label": 331,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.099497979807094,
+          5.179349060001616
+        ]
+      },
+      "id": "+2108+1538",
+      "properties": {
+        "T21_max_K": 336,
+        "T21_mean_K": 331.70001220703125,
+        "confidence": "nominal",
+        "count": 9,
+        "fire_count": 3,
+        "label": 336,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.107919685595714,
+          5.162505648424375
+        ]
+      },
+      "id": "+2110+1533",
+      "properties": {
+        "T21_max_K": 345.3999938964844,
+        "T21_mean_K": 328.93923885402154,
+        "confidence": "nominal",
+        "count": 6,
+        "fire_count": 2.9278131634819533,
+        "label": 336,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.124763097172955,
+          5.213035883156098
+        ]
+      },
+      "id": "+2115+1548",
+      "properties": {
+        "T21_max_K": 334.8999938964844,
+        "T21_mean_K": 327.5757878675414,
+        "confidence": "nominal",
+        "count": 6,
+        "fire_count": 2.8563340410474165,
+        "label": 334,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.124763097172955,
+          5.154083942635755
+        ]
+      },
+      "id": "+2118+1533",
+      "properties": {
+        "T21_max_K": 345.3999938964844,
+        "T21_mean_K": 338.0575917885814,
+        "confidence": "nominal",
+        "count": 64,
+        "fire_count": 3.0700636942675157,
+        "label": 345,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.141606508750196,
+          5.162505648424375
+        ]
+      },
+      "id": "+2120+1533",
+      "properties": {
+        "T21_max_K": 345.3999938964844,
+        "T21_mean_K": 334.8798122095539,
+        "confidence": "nominal",
+        "count": 6,
+        "fire_count": 2.9292285916489735,
+        "label": 338,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.138237826434748,
+          5.246722706310581
+        ]
+      },
+      "id": "+2121+1560",
+      "properties": {
+        "T21_max_K": 331.70001220703125,
+        "T21_mean_K": 322.1741361084848,
+        "confidence": "nominal",
+        "count": 32,
+        "fire_count": 4.499646142958245,
+        "label": 331,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.15664941771056,
+          5.248697451116188
+        ]
+      },
+      "id": "+2125+1560",
+      "properties": {
+        "T21_max_K": 330.20001220703125,
+        "T21_mean_K": 321.5299269681596,
+        "confidence": "nominal",
+        "count": 29,
+        "fire_count": 3.3340395480225986,
+        "label": 330,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.156765579169713,
+          5.088394637484515
+        ]
+      },
+      "id": "+2127+1513",
+      "properties": {
+        "T21_max_K": 344.8999938964844,
+        "T21_mean_K": 332.78072984243886,
+        "confidence": "nominal",
+        "count": 49,
+        "fire_count": 3.7342756183745585,
+        "label": 344,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.160134261485162,
+          5.287146894095959
+        ]
+      },
+      "id": "+2128+1570",
+      "properties": {
+        "T21_max_K": 337.8999938964844,
+        "T21_mean_K": 329.76666259765625,
+        "confidence": "nominal",
+        "count": 21,
+        "fire_count": 3,
+        "label": 337,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.160134261485162,
+          5.29556859988458
+        ]
+      },
+      "id": "+2128+1572",
+      "properties": {
+        "T21_max_K": 337.8999938964844,
+        "T21_mean_K": 324.3765778365959,
+        "confidence": "nominal",
+        "count": 14,
+        "fire_count": 2.9305949008498584,
+        "label": 333,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.1764786090156685,
+          5.136055253947522
+        ]
+      },
+      "id": "+2133+1528",
+      "properties": {
+        "T21_max_K": 346.8999938964844,
+        "T21_mean_K": 326.79998779296875,
+        "confidence": "nominal",
+        "count": 54,
+        "fire_count": 4,
+        "label": 346,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.190970661141956,
+          5.124672754727803
+        ]
+      },
+      "id": "+2135+1523",
+      "properties": {
+        "T21_max_K": 346.8999938964844,
+        "T21_mean_K": 329.0174626823518,
+        "confidence": "nominal",
+        "count": 13,
+        "fire_count": 3.01987224982257,
+        "label": 340,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.192136743481919,
+          5.162505648424375
+        ]
+      },
+      "id": "+2135+1533",
+      "properties": {
+        "T21_max_K": 336.3999938964844,
+        "T21_mean_K": 333.17935368564224,
+        "confidence": "nominal",
+        "count": 6,
+        "fire_count": 2.9278131634819533,
+        "label": 336,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.197189766955091,
+          5.162505648424375
+        ]
+      },
+      "id": "+2136+1533",
+      "properties": {
+        "T21_max_K": 336.3999938964844,
+        "T21_mean_K": 331.46636967614705,
+        "confidence": "nominal",
+        "count": 3,
+        "fire_count": 3,
+        "label": 334,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "geodesic": false,
+        "type": "Point",
+        "coordinates": [
+          7.1938210846396435,
+          5.182717742317065
+        ]
+      },
+      "id": "+2136+1540",
+      "properties": {
+        "T21_max_K": 337.79998779296875,
+        "T21_mean_K": 327.7215486668024,
+        "confidence": "nominal",
+        "count": 15,
+        "fire_count": 3.5286219081272088,
+        "label": 337,
+        "likely_source": "agricultural_or_other",
+        "signal_type": "FIRMS_fire_hotspot"
+      }
+    }
+  ],
+  "metadata": {
+    "exported": "2026-03-15T19:18:14.235348",
+    "count": 50,
+    "signal": "VIIRS fire hotspots",
+    "period": "2024-01-01 to 2024-06-30"
+  }
+}

@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+
+# GEE credentials — NEVER commit these
+.config/
+credentials.json
+service_account*.json
+*_key.json
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Large data files — only cache the small GeoJSON exports
+data/raw/
+data/processed/
+
+# Outputs are generated — commit selectively
+outputs/*.png
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Conda/pip
+*.egg
+dist/
+build/
