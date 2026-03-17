@@ -118,7 +118,7 @@
         "count": 29,
         "fire_count": 5.846859562455894,
         "label": 336,
-        "likely_source": "agricultural_or_other",
+        "likely_source": "refinery_candidate",
         "signal_type": "FIRMS_fire_hotspot"
       }
     },
@@ -140,7 +140,7 @@
         "count": 12,
         "fire_count": 8,
         "label": 333,
-        "likely_source": "agricultural_or_other",
+        "likely_source": "refinery_candidate",
         "signal_type": "FIRMS_fire_hotspot"
       }
     },
@@ -206,7 +206,7 @@
         "count": 35,
         "fire_count": 8.93992932862191,
         "label": 348,
-        "likely_source": "agricultural_or_other",
+        "likely_source": "refinery_candidate",
         "signal_type": "FIRMS_fire_hotspot"
       }
     },
@@ -228,7 +228,7 @@
         "count": 44,
         "fire_count": 9.102328863796751,
         "label": 342,
-        "likely_source": "agricultural_or_other",
+        "likely_source": "refinery_candidate",
         "signal_type": "FIRMS_fire_hotspot"
       }
     },
@@ -272,7 +272,7 @@
         "count": 29,
         "fire_count": 5.218926553672317,
         "label": 345,
-        "likely_source": "agricultural_or_other",
+        "likely_source": "refinery_candidate",
         "signal_type": "FIRMS_fire_hotspot"
       }
     },
@@ -294,7 +294,7 @@
         "count": 20,
         "fire_count": 5.302901627742393,
         "label": 337,
-        "likely_source": "agricultural_or_other",
+        "likely_source": "refinery_candidate",
         "signal_type": "FIRMS_fire_hotspot"
       }
     },
@@ -426,7 +426,7 @@
         "count": 25,
         "fire_count": 5.998586572438164,
         "label": 341,
-        "likely_source": "agricultural_or_other",
+        "likely_source": "refinery_candidate",
         "signal_type": "FIRMS_fire_hotspot"
       }
     },
@@ -1114,7 +1114,7 @@
     }
   ],
   "metadata": {
-    "exported": "2026-03-15T19:18:14.235348",
+    "exported": "2026-03-17T18:25:43.038757",
     "count": 50,
     "signal": "VIIRS fire hotspots",
     "period": "2024-01-01 to 2024-06-30"

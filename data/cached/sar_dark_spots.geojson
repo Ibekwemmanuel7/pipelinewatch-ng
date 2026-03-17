@@ -18,14 +18,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          6.641751542008279,
-          5.741687027280053
+          6.537744138008182,
+          5.445464027430048
         ]
       },
-      "id": "104",
+      "id": "27",
       "properties": {
-        "VV": -21.509427044165733,
-        "dark_spot_magnitude": 5.307049996049573,
+        "VV": -23.978669069287463,
+        "dark_spot_magnitude": 5.950274733922894,
         "dark_spot_mask": 1
       }
     },
@@ -34,14 +34,14 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          6.634479200189467,
-          5.7507836304644915
+          6.597331842123343,
+          5.687191438751389
         ]
       },
-      "id": "196",
+      "id": "87",
       "properties": {
-        "VV": -20.27504162093842,
-        "dark_spot_magnitude": 4.7961201569419565,
+        "VV": -23.30308551288978,
+        "dark_spot_magnitude": 5.558999275611134,
         "dark_spot_mask": 1
       }
     },
@@ -50,21 +50,101 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          6.5816398369810525,
-          5.588342789306052
+          6.603275505357358,
+          5.662644277475099
         ]
       },
-      "id": "284",
+      "id": "140",
       "properties": {
-        "VV": -19.396042045835642,
-        "dark_spot_magnitude": 4.902429095302354,
+        "VV": -22.44462538418444,
+        "dark_spot_magnitude": 6.184625234763578,
+        "dark_spot_mask": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.60188996305872,
+          5.664098655886732
+        ]
+      },
+      "id": "146",
+      "properties": {
+        "VV": -22.785273109547415,
+        "dark_spot_magnitude": 6.022542964050643,
+        "dark_spot_mask": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.626522292780379,
+          5.681587183229945
+        ]
+      },
+      "id": "184",
+      "properties": {
+        "VV": -14.440073992193216,
+        "dark_spot_magnitude": 2.8293110685347367,
+        "dark_spot_mask": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.527688224959203,
+          5.536183182368885
+        ]
+      },
+      "id": "197",
+      "properties": {
+        "VV": -21.772984090532464,
+        "dark_spot_magnitude": 5.5537275536362,
+        "dark_spot_mask": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.619917625774111,
+          5.729904786125503
+        ]
+      },
+      "id": "209",
+      "properties": {
+        "VV": -18.818739587860208,
+        "dark_spot_magnitude": 4.126275991961224,
+        "dark_spot_mask": 1
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          6.593956092239395,
+          5.6196180642717035
+        ]
+      },
+      "id": "228",
+      "properties": {
+        "VV": -13.743629593997136,
+        "dark_spot_magnitude": 2.3618674218080327,
         "dark_spot_mask": 1
       }
     }
   ],
   "metadata": {
-    "exported": "2026-03-15T19:18:11.965129",
-    "count": 3,
+    "exported": "2026-03-17T18:25:41.645700",
+    "count": 8,
     "signal": "SAR dark spots",
     "period": "2024-01-01 to 2024-06-30"
   }

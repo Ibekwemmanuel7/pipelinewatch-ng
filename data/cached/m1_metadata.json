@@ -1,17 +1,12 @@
 {
   "module": "M1_ingestion",
-  "exported": "2026-03-15T19:18:14.421838",
-  "study_area": "Trans Niger Pipeline corridor, Niger Delta",
+  "exported": "2026-03-17T18:25:43.285454",
   "bbox": [
     6.5,
     5.0,
     7.2,
     5.8
   ],
-  "periods": {
-    "baseline": "2023-01-01 to 2023-06-30",
-    "recent": "2024-01-01 to 2024-06-30"
-  },
   "scene_counts": {
     "s1_baseline": 30,
     "s1_recent": 29,
