@@ -7,7 +7,7 @@
 [![Google Earth Engine](https://img.shields.io/badge/Google%20Earth%20Engine-Powered-green.svg)](https://earthengine.google.com)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> Nigeria loses an estimated **150,000+ barrels per day** to crude oil theft. The Niger Delta's mangrove creek terrain makes ground surveillance nearly impossible. Existing commercial monitoring systems cost $50,000–$500,000 per year — beyond the reach of Nigerian agencies. PipelineWatch-NG is the first open-source, multi-sensor, cloud-native pipeline for automated crude oil theft detection in the Niger Delta, deployable at zero data cost.
+> Nigeria loses an estimated **150,000+ barrels per day** to crude oil theft. The Niger Delta's mangrove creek terrain makes ground surveillance nearly impossible. Existing commercial monitoring systems cost $50,000–$500,000 per year - beyond the reach of Nigerian agencies. PipelineWatch-NG is the first open-source, multi-sensor, cloud-native pipeline for automated crude oil theft detection in the Niger Delta, deployable at zero data cost.
 
 ---
 
