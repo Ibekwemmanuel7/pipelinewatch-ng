@@ -26,7 +26,7 @@ Most existing approaches to Niger Delta monitoring are:
 - Static maps published in academic papers — not operational
 - Commercial systems costing $50k–$500k/year — inaccessible to NNPC or Nigerian government agencies
 
-PipelineWatch-NG is the first open-source, multi-sensor, cloud-native pipeline for automated crude oil theft detection in the Niger Delta — combining SAR spill detection, thermal refinery identification, and SO₂ chemical fingerprinting into a single reproducible framework deployable at zero data cost.
+PipelineWatch-NG is the first open-source, multi-sensor, cloud-native pipeline for automated crude oil theft detection in the Niger Delta. It combines SAR spill detection, thermal refinery identification, and SO₂ chemical fingerprinting into a single reproducible framework deployable at zero data cost.
 
 ---
 
