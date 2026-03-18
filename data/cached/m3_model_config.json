@@ -13,7 +13,7 @@
     "NDVI_change"
   ],
   "model_version": "1.0",
-  "trained": "2026-03-15T21:22:10.793412",
+  "trained": "2026-03-17T19:36:16.519206",
   "n_samples": 270,
   "cv_accuracy": 0.981,
   "risk_tiers": {
