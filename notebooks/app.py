@@ -75,19 +75,28 @@ df_clusters = load_clusters()
 df_val      = load_validation()
 model_cfg   = load_model_config()
 nrt         = load_nrt()
+nrt_alert   = nrt.get("alert_level", "PENDING") if nrt else "PENDING"
+nrt_window  = nrt.get("nrt_window", "Awaiting first scheduled update") if nrt else "Awaiting first scheduled update"
+nrt_run_date = nrt.get("run_date", "") if nrt else ""
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
 with st.sidebar:
     st.title("PipelineWatch-NG")
-    st.caption("Satellite-based crude oil theft monitoring")
+    st.caption("Near-real-time satellite crude oil theft monitoring")
     st.markdown("---")
     st.markdown("**Study area**")
     st.markdown("Trans Niger Pipeline (TNP) corridor")
     st.markdown("5.0–5.8°N, 6.5–7.2°E")
     st.markdown("---")
-    st.markdown("**Analysis periods**")
+    st.markdown("**Monitoring mode**")
+    st.markdown("Near-real-time rolling alert pipeline")
+    st.markdown("Latest window: " + nrt_window)
+    if nrt_run_date:
+        st.markdown("Last run: " + nrt_run_date[:10])
+    st.markdown("")
+    st.markdown("**Model calibration**")
     st.markdown("Baseline: Jan–Jun 2023")
-    st.markdown("Recent:   Jan–Jun 2024")
+    st.markdown("Historical comparison: Jan–Jun 2024")
     st.markdown("---")
     st.markdown("**Sensor stack**")
     st.markdown("- Sentinel-1 SAR (cloud-free, 24/7)")
@@ -97,11 +106,9 @@ with st.sidebar:
     st.markdown("---")
 
     # NRT alert badge
-    if nrt:
-        alert = nrt.get("alert_level", "LOW")
-        color = {"HIGH": "🔴", "MEDIUM": "🟡", "LOW": "🟢"}.get(alert, "⚪")
-        st.markdown("**Latest NRT alert**")
-        st.markdown(color + " " + alert + "  —  " + nrt.get("nrt_window", ""))
+    color = {"HIGH": "🔴", "MEDIUM": "🟡", "LOW": "🟢", "PENDING": "⚪"}.get(nrt_alert, "⚪")
+    st.markdown("**Latest NRT alert**")
+    st.markdown(color + " " + nrt_alert)
 
     st.markdown("---")
     st.markdown("Built by **Emmanuel Ibekwe**")
@@ -109,7 +116,7 @@ with st.sidebar:
 
 # ── Header ────────────────────────────────────────────────────────────────────
 st.title("PipelineWatch-NG")
-st.markdown("#### Satellite-based crude oil theft and pipeline monitoring — Niger Delta, Nigeria")
+st.markdown("#### Near-real-time satellite crude oil theft and pipeline monitoring — Niger Delta, Nigeria")
 st.markdown("---")
 
 # ── KPI metrics ───────────────────────────────────────────────────────────────
@@ -119,12 +126,19 @@ n_fire      = len(firms_gj["features"]) if firms_gj else 0
 n_confirmed = int(df_val["SO2_confirmed"].sum()) if not df_val.empty else 0
 cv_acc      = model_cfg.get("cv_accuracy", 0)
 
-col1, col2, col3, col4, col5 = st.columns(5)
-col1.metric("HIGH risk zones",          str(n_high),      delta="Active alerts")
-col2.metric("MEDIUM risk zones",        str(n_medium),    delta="Monitor")
-col3.metric("Fire hotspots (VIIRS)",    str(n_fire),      delta="Persistent detections")
-col4.metric("Confirmed refinery sites", str(n_confirmed), delta="SO₂ + fire co-located")
-col5.metric("Model CV accuracy",        str(round(cv_acc * 100, 1)) + "%", delta="XGBoost 5-fold")
+col1, col2, col3, col4, col5, col6 = st.columns(6)
+col1.metric("NRT alert",                 nrt_alert,        delta=nrt_window)
+col2.metric("HIGH risk zones",           str(n_high),      delta="Model alerts")
+col3.metric("MEDIUM risk zones",         str(n_medium),    delta="Monitor")
+col4.metric("Fire hotspots (VIIRS)",     str(n_fire),      delta="Baseline detections")
+col5.metric("Confirmed sites",           str(n_confirmed), delta="SO₂ + fire")
+col6.metric("Model CV accuracy",         str(round(cv_acc * 100, 1)) + "%", delta="XGBoost")
+
+if not nrt:
+    st.info(
+        "Near-real-time mode is enabled. The latest rolling alert will appear after "
+        "the first GitHub Actions NRT run writes data/cached/m5_nrt_latest.json."
+    )
 
 st.markdown("---")
 
