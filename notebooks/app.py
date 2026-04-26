@@ -433,10 +433,16 @@ with tab5:
                       "LOW":    "background-color: #E6F1FB; color: #0C447C"}
             return colors.get(val, "")
 
-        st.dataframe(
-            df_alerts[alert_cols].round(3).style.applymap(color_tier, subset=["risk_tier"]),
-            use_container_width=True, hide_index=True
-        )
+        df_val["Confirmed"] = df_val["SO2_confirmed"].map({
+    True: "🔴 Confirmed",
+    False: "⚪ Not confirmed"
+})
+
+st.dataframe(
+    df_val[display_cols + ["Confirmed"]].round(3),
+    use_container_width=True,
+    hide_index=True
+)
         st.caption(str(len(df_alerts)) + " locations shown")
 
         csv = df_alerts[alert_cols].round(3).to_csv(index=False)
