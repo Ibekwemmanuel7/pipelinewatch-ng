@@ -330,13 +330,18 @@ This low-mean / high-max pattern is the correct signature for intermittent sourc
             if val is True or val == "True":
                 return "background-color: #FCEBEB; color: #A32D2D"
             return ""
+        
+        df_alerts["Risk"] = df_alerts["risk_tier"].map({
+    "HIGH": "🔴 HIGH",
+    "MEDIUM": "🟠 MEDIUM",
+    "LOW": "🔵 LOW"
+})
 
-        st.dataframe(
-            df_val[display_cols].round(3).style.applymap(
-                highlight_confirmed, subset=["SO2_confirmed"]
-            ),
-            use_container_width=True, hide_index=True
-        )
+st.dataframe(
+    df_alerts[["lat","lon","combined_risk_score","Risk"]].round(3),
+    use_container_width=True,
+    hide_index=True
+)
 
         if n_conf > 0:
             st.markdown("**Recommended NNPC field inspection coordinates:**")
