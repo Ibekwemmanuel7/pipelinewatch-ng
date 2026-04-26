@@ -1,0 +1,52 @@
+name: PipelineWatch NRT update
+
+on:
+  schedule:
+    # Daily 06:15 UTC. The script uses a rolling 7-day satellite window.
+    - cron: "15 6 * * *"
+  workflow_dispatch:
+    inputs:
+      days:
+        description: "Rolling NRT window in days"
+        required: false
+        default: "7"
+
+permissions:
+  contents: write
+
+jobs:
+  update-nrt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Run NRT update
+        env:
+          GEE_PROJECT_ID: ${{ secrets.GEE_PROJECT_ID }}
+          EE_SERVICE_ACCOUNT: ${{ secrets.EE_SERVICE_ACCOUNT }}
+          EE_PRIVATE_KEY: ${{ secrets.EE_PRIVATE_KEY }}
+          EE_CREDENTIALS_JSON: ${{ secrets.EE_CREDENTIALS_JSON }}
+        run: |
+          DAYS="${{ github.event.inputs.days || '7' }}"
+          python modules/m5_nrt_update.py --days "$DAYS"
+
+      - name: Commit NRT artifacts
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "NRT update"
+          file_pattern: >
+            data/cached/m5_nrt_latest.json
+            data/cached/m5_nrt_history.csv
+            outputs/m5_nrt_trend.html

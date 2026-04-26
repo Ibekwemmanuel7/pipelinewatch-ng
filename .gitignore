@@ -1,0 +1,19 @@
+# Local Python/runtime artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local Codex/runtime installs and logs
+.codex_deps/
+.streamlit-*.log
+
+# Notebook/editor scratch files
+.ipynb_checkpoints/
+notebooks/__pycache__/
+notebooks/.ipynb_checkpoints/
+outputs/.ipynb_checkpoints/
+
+# Local virtual environments
+.venv/
+venv/
+env/
