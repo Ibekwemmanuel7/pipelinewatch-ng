@@ -330,18 +330,13 @@ This low-mean / high-max pattern is the correct signature for intermittent sourc
             if val is True or val == "True":
                 return "background-color: #FCEBEB; color: #A32D2D"
             return ""
-        
-        df_alerts["Risk"] = df_alerts["risk_tier"].map({
-    "HIGH": "🔴 HIGH",
-    "MEDIUM": "🟠 MEDIUM",
-    "LOW": "🔵 LOW"
-})
 
-st.dataframe(
-    df_alerts[["lat","lon","combined_risk_score","Risk"]].round(3),
-    use_container_width=True,
-    hide_index=True
-)
+        st.dataframe(
+            df_val[display_cols].round(3).style.map(
+                highlight_confirmed, subset=["SO2_confirmed"]
+            ),
+            use_container_width=True, hide_index=True
+        )
 
         if n_conf > 0:
             st.markdown("**Recommended NNPC field inspection coordinates:**")
@@ -433,16 +428,10 @@ with tab5:
                       "LOW":    "background-color: #E6F1FB; color: #0C447C"}
             return colors.get(val, "")
 
-        df_val["Confirmed"] = df_val["SO2_confirmed"].map({
-    True: "🔴 Confirmed",
-    False: "⚪ Not confirmed"
-})
-
-st.dataframe(
-    df_val[display_cols + ["Confirmed"]].round(3),
-    use_container_width=True,
-    hide_index=True
-)
+        st.dataframe(
+            df_alerts[alert_cols].round(3).style.map(color_tier, subset=["risk_tier"]),
+            use_container_width=True, hide_index=True
+        )
         st.caption(str(len(df_alerts)) + " locations shown")
 
         csv = df_alerts[alert_cols].round(3).to_csv(index=False)
