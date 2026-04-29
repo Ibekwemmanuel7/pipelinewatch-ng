@@ -189,13 +189,13 @@ else:
         unsafe_allow_html=True,
     )
     f3.markdown(
-        f"**FIRMS / VIIRS images**  \n{nrt.get('firms_images', 0)} in window  \n"
-        f"<span style='color:#666;font-size:0.85em'>~4–6 passes/day expected</span>",
+        f"**FIRMS / VIIRS detections**  \n{nrt.get('firms_images', 0)} in window  \n"
+        f"<span style='color:#666;font-size:0.85em'>Active-fire scenes only — 1 written per pass when fires present</span>",
         unsafe_allow_html=True,
     )
     f4.markdown(
-        f"**TROPOMI SO₂ images**  \n{nrt.get('tropomi_images', 0)} in window  \n"
-        f"<span style='color:#666;font-size:0.85em'>~1 pass/day expected</span>",
+        f"**TROPOMI SO₂ retrievals**  \n{nrt.get('tropomi_images', 0)} in window  \n"
+        f"<span style='color:#666;font-size:0.85em'>Daily global coverage; cloud-masked in wet season</span>",
         unsafe_allow_html=True,
     )
 
