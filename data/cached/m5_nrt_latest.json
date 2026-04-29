@@ -1,0 +1,13 @@
+{
+  "run_date": "2026-04-29T02:33:53.318820+00:00",
+  "nrt_window": "2026-04-22 to 2026-04-29",
+  "alert_level": "MEDIUM",
+  "fire_pixels": 85,
+  "fire_anomaly": true,
+  "baseline_weekly_avg": 1.923,
+  "so2_mean_du": -0.053,
+  "so2_max_du": 0.619,
+  "so2_anomaly": false,
+  "firms_images": 6,
+  "tropomi_images": 11
+}
