@@ -6,7 +6,7 @@ Live demo: https://pipelinewatch-ng.streamlit.app
 GitHub:    https://github.com/Ibekwemmanuel7/pipelinewatch-ng
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 import json
 import os
 
@@ -153,7 +153,50 @@ col6.metric(
 if not nrt:
     st.info(
         "Near-real-time mode is enabled. The latest rolling alert will appear after "
-        "the first GitHub Actions NRT run writes data/cached/m5_nrt_latest.json."
+        "the first GitHub Actions NRT run writes data/cached/m5_nrt_latest.json. "
+        "The pipeline runs every 6 hours once the GEE service-account secrets are "
+        "configured in the GitHub repository."
+    )
+else:
+    # Per-sensor freshness panel: auditable data age for ops/procurement review.
+    try:
+        last_run_dt = datetime.fromisoformat(nrt["run_date"])
+        if last_run_dt.tzinfo is None:
+            last_run_dt = last_run_dt.replace(tzinfo=timezone.utc)
+        secs = (datetime.now(timezone.utc) - last_run_dt).total_seconds()
+        if secs < 3600:
+            age_str = f"{int(secs / 60)} min ago"
+        elif secs < 86400:
+            age_str = f"{round(secs / 3600, 1)} h ago"
+        else:
+            age_str = f"{round(secs / 86400, 1)} d ago"
+        is_stale = secs > 6 * 3600 * 1.5  # 1.5x the cron interval
+    except Exception:
+        age_str = "unknown"
+        is_stale = False
+
+    f1, f2, f3, f4 = st.columns(4)
+    age_color = "#E24B4A" if is_stale else "#1D9E75"
+    f1.markdown(
+        f"**Pipeline last run**  \n"
+        f"<span style='color:{age_color};font-weight:600'>{age_str}</span>  \n"
+        f"<span style='color:#666;font-size:0.85em'>Cron: every 6 h</span>",
+        unsafe_allow_html=True,
+    )
+    f2.markdown(
+        f"**Window**  \n{nrt.get('nrt_window', '—')}  \n"
+        f"<span style='color:#666;font-size:0.85em'>Rolling 7-day analysis</span>",
+        unsafe_allow_html=True,
+    )
+    f3.markdown(
+        f"**FIRMS / VIIRS images**  \n{nrt.get('firms_images', 0)} in window  \n"
+        f"<span style='color:#666;font-size:0.85em'>~4–6 passes/day expected</span>",
+        unsafe_allow_html=True,
+    )
+    f4.markdown(
+        f"**TROPOMI SO₂ images**  \n{nrt.get('tropomi_images', 0)} in window  \n"
+        f"<span style='color:#666;font-size:0.85em'>~1 pass/day expected</span>",
+        unsafe_allow_html=True,
     )
 
 st.markdown("---")

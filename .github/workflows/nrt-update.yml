@@ -2,8 +2,11 @@ name: PipelineWatch NRT update
 
 on:
   schedule:
-    # Daily 06:15 UTC. The script uses a rolling 7-day satellite window.
-    - cron: "15 6 * * *"
+    # Every 6 hours at minute 15 (00:15, 06:15, 12:15, 18:15 UTC).
+    # VIIRS fire data lands every few hours, so sub-daily refresh genuinely
+    # improves fire detection latency. SAR (6-12 day revisit) and TROPOMI
+    # (1 pass/day) will be no-ops on most runs, which is cheap and harmless.
+    - cron: "15 */6 * * *"
   workflow_dispatch:
     inputs:
       days:
