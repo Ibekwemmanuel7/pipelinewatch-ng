@@ -5,7 +5,7 @@
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://pipelinewatch-ng.streamlit.app)
 [![Python](https://img.shields.io/badge/Python-3.10-blue.svg)](https://python.org)
 [![Google Earth Engine](https://img.shields.io/badge/Google%20Earth%20Engine-Powered-green.svg)](https://earthengine.google.com)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: PolyForm NC 1.0.0](https://img.shields.io/badge/License-PolyForm--NC--1.0.0-blue.svg)](LICENSE)
 
 > Nigeria loses an estimated **150,000+ barrels per day** to crude oil theft. The Niger Delta's mangrove creek terrain makes ground surveillance nearly impossible. PipelineWatch-NG uses free space-based sensors to detect oil spills, illegal refineries, and suspicious activity - entirely from the cloud, with zero satellite downloads.
 
@@ -217,6 +217,16 @@ pipelinewatch-ng/
 - **AIS vessel tracking**: Module 1 architecture includes AIS bunkering vessel detection — not yet implemented. MarineTraffic API integration is the next priority.
 - **SAR speckle filtering**: Deferred from interactive notebooks due to memory constraints. A GEE Export Task approach in Module 2 will enable proper Lee filtering at scale.
 - **Temporal resolution**: Current pipeline runs on 6-month composites. A near-real-time weekly alert mode is feasible with the same architecture.
+
+---
+
+## License
+
+Copyright © 2024–2026 Emmanuel Ibekwe. All rights reserved.
+
+This project is licensed under the **PolyForm Noncommercial License 1.0.0** — see the `LICENSE` file for the full terms. In summary: you may view, run, and modify this code for non-commercial purposes (research, teaching, personal use, internal evaluation). You may **not** use it, in whole or in part, in any commercial product or service without a separate commercial license from the author.
+
+For commercial licensing, partnership inquiries, or pilot programs with national oil companies, IOCs, regulators, or pipeline security operators, contact **ibekwemmanuel@gmail.com**.
 
 ---
 
