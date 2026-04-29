@@ -22,9 +22,9 @@ No login required. No installation. Open in any browser.
 ## What makes this different
 
 Most existing approaches to Niger Delta monitoring are:
-- Single-sensor (SAR only, or optical only) — blind in clouds or at night
-- Static maps published in academic papers — not operational
-- Commercial systems costing $50k–$500k/year — inaccessible to NNPC or Nigerian government agencies
+- Single-sensor (SAR only, or optical only) - blind in clouds or at night
+- Static maps published in academic papers - not operational
+- Commercial systems costing $50k–$500k/year - inaccessible to NNPC or Nigerian government agencies
 
 PipelineWatch-NG is the first open-source, multi-sensor, cloud-native pipeline for automated crude oil theft detection in the Niger Delta. It combines SAR spill detection, thermal refinery identification, and SO₂ chemical fingerprinting into a single reproducible framework deployable at zero data cost.
 
@@ -39,7 +39,7 @@ PipelineWatch-NG is the first open-source, multi-sensor, cloud-native pipeline f
 | TROPOMI SO₂ | Chemical plumes from crude burning | ✅ UV backscatter | ❌ Daytime | Free |
 | Sentinel-2 MSI | Vegetation dieback along pipeline ROW | ❌ Optical | ❌ Daytime | Free |
 
-All data accessed via **Google Earth Engine** — no downloads, no storage costs.
+All data accessed via **Google Earth Engine** - no downloads, no storage costs.
 
 ---
 
@@ -56,19 +56,19 @@ One of the highest crude oil theft corridors in Nigeria, traversing mangrove cre
 ## Module structure
 
 ```
-Module 1 — Data Ingestion
+Module 1 - Data Ingestion
   Sentinel-1 SAR (30 scenes), FIRMS/VIIRS (181 images), TROPOMI SO₂ (278 images)
   Output: GeoJSON feature collections, 50 fire hotspots detected
 
-Module 2 — Processing & Feature Engineering
+Module 2 - Processing & Feature Engineering
   Sentinel-2 NDVI/NDWI, SAR change detection, DBSCAN clustering
   Output: 270-sample feature table, 8 refinery site clusters, 11,685 chronic spill pixels
 
-Module 3 — ML Anomaly Detection
+Module 3 - ML Anomaly Detection
   XGBoost risk classifier (98.1% CV accuracy), Isolation Forest anomaly detection
   Output: Risk-scored dataset, trained models, feature importance
 
-Module 4 — Risk Fusion Dashboard
+Module 4 - Risk Fusion Dashboard
   Streamlit + Folium interactive dashboard, live public deployment
   Output: https://pipelinewatch-ng.streamlit.app
 ```
@@ -108,9 +108,9 @@ Risk tier assignment (HIGH ≥ 0.65 | MEDIUM ≥ 0.35 | LOW < 0.35)
 ```
 
 Top features by XGBoost gain:
-1. `SAR_change_dB` — new darkening vs baseline (new spill indicator)
-2. `NDVI_change` — vegetation loss along pipeline ROW
-3. `VV` / `VH` — raw SAR backscatter
+1. `SAR_change_dB` - new darkening vs baseline (new spill indicator)
+2. `NDVI_change` - vegetation loss along pipeline ROW
+3. `VV` / `VH` - raw SAR backscatter
 
 ---
 
@@ -143,9 +143,9 @@ cd notebooks
 jupyter notebook
 ```
 
-1. `01_module1_ingestion.ipynb` — set your GEE project ID, run all cells
-2. `02_module2_processing.ipynb` — run all cells
-3. `03_module3_ml.ipynb` — run all cells
+1. `01_module1_ingestion.ipynb` - set your GEE project ID, run all cells
+2. `02_module2_processing.ipynb` - run all cells
+3. `03_module3_ml.ipynb` - run all cells
 
 ### Run the dashboard locally
 
