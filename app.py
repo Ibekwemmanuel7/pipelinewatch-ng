@@ -138,7 +138,17 @@ col2.metric("HIGH risk zones", str(n_high), delta="Model alerts")
 col3.metric("MEDIUM risk zones", str(n_medium), delta="Monitor")
 col4.metric("Fire hotspots (VIIRS)", str(n_fire), delta="Baseline detections")
 col5.metric("Confirmed sites", str(n_confirmed), delta="SO2 + fire")
-col6.metric("Model CV accuracy", f"{round(cv_acc * 100, 1)}%", delta="XGBoost")
+col6.metric(
+    "Model CV accuracy",
+    f"{round(cv_acc * 100, 1)}%",
+    delta="XGBoost",
+    help=(
+        "Cross-validated against weak proxy labels derived from domain rules, "
+        "not ground-truth theft incidents. Indicates internal model "
+        "self-consistency rather than confirmed real-world detection rate. "
+        "Supervised retraining will require collaboration with NNPC field teams."
+    ),
+)
 
 if not nrt:
     st.info(
@@ -551,7 +561,7 @@ automated crude oil theft detection in the Niger Delta - deployable at zero cost
     st.markdown("**Key results**")
     st.markdown("- 50 persistent fire hotspots detected over the TNP corridor")
     st.markdown("- 8 DBSCAN cluster sites identified")
-    st.markdown("- **6/8 clusters chemically confirmed** by TROPOMI SO2 dry season validation")
+    st.markdown("- **6/8 clusters show co-located episodic SO2 elevation (>3 DU)** consistent with crude burning, via TROPOMI dry-season validation")
     st.markdown("- 11,685 chronic SAR spill pixels mapped")
     st.markdown("- 2 HIGH-risk zones at 5.637 N/6.625 E and 5.727 N/6.625 E")
 
