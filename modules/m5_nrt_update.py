@@ -282,10 +282,12 @@ def write_trend_chart(history: pd.DataFrame) -> Path:
 def main() -> None:
     args = parse_args()
     start, end = get_window(args.days, args.end_date)
-    roi = ee.Geometry.Rectangle(ROI_BOUNDS)
 
     print(f"NRT window: {start} to {end}")
     init_earth_engine(args.project)
+    # ROI must be constructed AFTER ee.Initialize, otherwise EE client raises
+    # "Earth Engine client library not initialized" on first ee.* call.
+    roi = ee.Geometry.Rectangle(ROI_BOUNDS)
 
     fire = fetch_firms_metrics(roi, start, end)
     so2 = fetch_tropomi_metrics(roi, start, end)
