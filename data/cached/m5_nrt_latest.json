@@ -1,13 +1,13 @@
 {
-  "run_date": "2026-04-29T19:55:06.879198+00:00",
-  "nrt_window": "2026-04-22 to 2026-04-29",
-  "alert_level": "MEDIUM",
-  "fire_pixels": 85,
-  "fire_anomaly": true,
+  "run_date": "2026-04-30T04:05:09.736203+00:00",
+  "nrt_window": "2026-04-23 to 2026-04-30",
+  "alert_level": "LOW",
+  "fire_pixels": 0,
+  "fire_anomaly": false,
   "baseline_weekly_avg": 1.923,
-  "so2_mean_du": -0.053,
-  "so2_max_du": 0.619,
+  "so2_mean_du": 0.046,
+  "so2_max_du": 1.495,
   "so2_anomaly": false,
   "firms_images": 7,
-  "tropomi_images": 11
+  "tropomi_images": 10
 }
