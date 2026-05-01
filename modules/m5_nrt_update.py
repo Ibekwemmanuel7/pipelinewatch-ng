@@ -25,11 +25,11 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CACHE_DIR = PROJECT_ROOT / "data" / "cached"
 OUTPUT_DIR = PROJECT_ROOT / "outputs"
 
-ROI_BOUNDS = [6.50, 5.00, 7.20, 5.80]
-FIRMS_BRIGHTNESS_K = 330.0
-SO2_THRESHOLD_DU = 1.5
-BASELINE_FIRE_HOTSPOTS = 50
-BASELINE_WEEKS = 26
+# Make the project root importable so `from config.aois import ...` works
+# regardless of where the script is invoked from.
+import sys
+sys.path.insert(0, str(PROJECT_ROOT))
+from config.aois import get_active_aoi  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:
@@ -44,6 +44,14 @@ def parse_args() -> argparse.Namespace:
         "--end-date",
         default=None,
         help="Optional UTC end date as YYYY-MM-DD. Defaults to today.",
+    )
+    parser.add_argument(
+        "--aoi",
+        default=None,
+        help=(
+            "AOI name from config/aois.yaml. If omitted, uses the "
+            "PIPELINEWATCH_AOI env var or falls back to 'niger_delta'."
+        ),
     )
     return parser.parse_args()
 
@@ -78,7 +86,12 @@ def get_window(days: int, end_date: str | None) -> tuple[str, str]:
     return start.strftime("%Y-%m-%d"), end.strftime("%Y-%m-%d")
 
 
-def fetch_firms_metrics(roi: ee.Geometry, start: str, end: str) -> dict:
+def fetch_firms_metrics(roi: ee.Geometry, start: str, end: str, aoi: dict) -> dict:
+    firms_brightness_k = float(aoi.get("firms_brightness_k", 330.0))
+    baseline_thermal_hotspots = float(aoi.get("baseline_thermal_hotspots", 50))
+    baseline_weeks = float(aoi.get("baseline_weeks", 26))
+    baseline_weekly_avg = baseline_thermal_hotspots / baseline_weeks
+
     firms_nrt = (
         ee.ImageCollection("FIRMS")
         .filterDate(start, end)
@@ -92,7 +105,7 @@ def fetch_firms_metrics(roi: ee.Geometry, start: str, end: str) -> dict:
             "firms_images": 0,
             "fire_pixels": 0,
             "fire_anomaly": False,
-            "baseline_weekly_avg": round(BASELINE_FIRE_HOTSPOTS / BASELINE_WEEKS, 3),
+            "baseline_weekly_avg": round(baseline_weekly_avg, 3),
         }
 
     firms_comp = (
@@ -104,7 +117,7 @@ def fetch_firms_metrics(roi: ee.Geometry, start: str, end: str) -> dict:
     )
     hot_px = (
         firms_comp.select("T21_max")
-        .gt(FIRMS_BRIGHTNESS_K)
+        .gt(firms_brightness_k)
         .reduceRegion(
             reducer=ee.Reducer.sum(),
             geometry=roi,
@@ -115,7 +128,6 @@ def fetch_firms_metrics(roi: ee.Geometry, start: str, end: str) -> dict:
         .getInfo()
     )
     fire_pixels = int(hot_px.get("T21_max", 0) or 0)
-    baseline_weekly_avg = BASELINE_FIRE_HOTSPOTS / BASELINE_WEEKS
     fire_anomaly = fire_pixels > (baseline_weekly_avg * 1.5)
 
     return {
@@ -126,7 +138,9 @@ def fetch_firms_metrics(roi: ee.Geometry, start: str, end: str) -> dict:
     }
 
 
-def fetch_tropomi_metrics(roi: ee.Geometry, start: str, end: str) -> dict:
+def fetch_tropomi_metrics(roi: ee.Geometry, start: str, end: str, aoi: dict) -> dict:
+    so2_threshold_du = float(aoi.get("so2_threshold_du", 1.5))
+
     tropomi_nrt = (
         ee.ImageCollection("COPERNICUS/S5P/NRTI/L3_SO2")
         .filterDate(start, end)
@@ -164,17 +178,21 @@ def fetch_tropomi_metrics(roi: ee.Geometry, start: str, end: str) -> dict:
         "tropomi_images": image_count,
         "so2_mean_du": round(so2_mean, 3),
         "so2_max_du": round(so2_max, 3),
-        "so2_anomaly": bool(so2_mean > SO2_THRESHOLD_DU),
+        "so2_anomaly": bool(so2_mean > so2_threshold_du),
     }
 
 
-def build_alert_report(start: str, end: str, fire: dict, so2: dict) -> dict:
+def build_alert_report(start: str, end: str, fire: dict, so2: dict, aoi_name: str, aoi: dict) -> dict:
     combined_alert = fire["fire_anomaly"] or so2["so2_anomaly"]
     alert_level = "HIGH" if fire["fire_anomaly"] and so2["so2_anomaly"] else "MEDIUM" if combined_alert else "LOW"
 
     return {
         "run_date": datetime.now(timezone.utc).isoformat(),
         "nrt_window": f"{start} to {end}",
+        "aoi_name": aoi_name,
+        "aoi_full_name": aoi.get("full_name", aoi_name),
+        "aoi_country": aoi.get("country", ""),
+        "aoi_bounds": aoi.get("bounds"),
         "alert_level": alert_level,
         "fire_pixels": fire["fire_pixels"],
         "fire_anomaly": fire["fire_anomaly"],
@@ -223,24 +241,26 @@ def update_history(report: dict) -> pd.DataFrame:
     return history
 
 
-def write_trend_chart(history: pd.DataFrame) -> Path:
+def write_trend_chart(history: pd.DataFrame, aoi: dict) -> Path:
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     out = OUTPUT_DIR / "m5_nrt_trend.html"
     plot_df = history.copy()
     plot_df["date"] = pd.to_datetime(plot_df["date"])
+    so2_threshold_du = float(aoi.get("so2_threshold_du", 1.5))
+    aoi_label = aoi.get("full_name", aoi.get("short_name", "AOI"))
 
     fig = make_subplots(
         rows=2,
         cols=1,
         shared_xaxes=True,
-        subplot_titles=("Rolling VIIRS fire pixel count", "Rolling TROPOMI SO2 mean"),
+        subplot_titles=("Rolling VIIRS thermal hotspot count", "Rolling TROPOMI SO2 mean"),
     )
     fig.add_trace(
         go.Scatter(
             x=plot_df["date"],
             y=plot_df["fire_pixels"],
             mode="lines+markers",
-            name="Fire pixels",
+            name="Thermal hotspots",
             line=dict(color="#E24B4A", width=2),
             marker=dict(size=6),
         ),
@@ -260,7 +280,7 @@ def write_trend_chart(history: pd.DataFrame) -> Path:
         col=1,
     )
     fig.add_hline(
-        y=SO2_THRESHOLD_DU,
+        y=so2_threshold_du,
         line_dash="dash",
         line_color="#854F0B",
         annotation_text="Threshold",
@@ -268,7 +288,7 @@ def write_trend_chart(history: pd.DataFrame) -> Path:
         col=1,
     )
     fig.update_layout(
-        title="PipelineWatch-NG - Rolling NRT Trend<br>Trans Niger Pipeline corridor",
+        title=f"PipelineWatch-NG - Rolling NRT Trend<br>{aoi_label}",
         height=520,
         plot_bgcolor="white",
         paper_bgcolor="white",
@@ -281,29 +301,34 @@ def write_trend_chart(history: pd.DataFrame) -> Path:
 
 def main() -> None:
     args = parse_args()
+    aoi_name, aoi = get_active_aoi(args.aoi)
+    bounds = aoi["bounds"]
     start, end = get_window(args.days, args.end_date)
 
-    print(f"NRT window: {start} to {end}")
+    print(f"Active AOI : {aoi_name} ({aoi.get('full_name', '')})")
+    print(f"Bounds     : {bounds}  [west, south, east, north]")
+    print(f"NRT window : {start} to {end}")
+
     init_earth_engine(args.project)
     # ROI must be constructed AFTER ee.Initialize, otherwise EE client raises
     # "Earth Engine client library not initialized" on first ee.* call.
-    roi = ee.Geometry.Rectangle(ROI_BOUNDS)
+    roi = ee.Geometry.Rectangle(bounds)
 
-    fire = fetch_firms_metrics(roi, start, end)
-    so2 = fetch_tropomi_metrics(roi, start, end)
-    report = build_alert_report(start, end, fire, so2)
+    fire = fetch_firms_metrics(roi, start, end, aoi)
+    so2 = fetch_tropomi_metrics(roi, start, end, aoi)
+    report = build_alert_report(start, end, fire, so2, aoi_name, aoi)
 
     latest_path = save_latest_report(report)
     history = update_history(report)
-    chart_path = write_trend_chart(history)
+    chart_path = write_trend_chart(history, aoi)
 
     print("PIPELINEWATCH-NG NRT ALERT REPORT")
-    print(f"Alert level : {report['alert_level']}")
-    print(f"Fire pixels : {report['fire_pixels']} | anomaly={report['fire_anomaly']}")
-    print(f"SO2 mean DU : {report['so2_mean_du']} | anomaly={report['so2_anomaly']}")
-    print(f"Latest JSON : {latest_path.relative_to(PROJECT_ROOT)}")
-    print(f"History CSV : {(CACHE_DIR / 'm5_nrt_history.csv').relative_to(PROJECT_ROOT)}")
-    print(f"Trend chart : {chart_path.relative_to(PROJECT_ROOT)}")
+    print(f"Alert level    : {report['alert_level']}")
+    print(f"Thermal pixels : {report['fire_pixels']} | anomaly={report['fire_anomaly']}")
+    print(f"SO2 mean DU    : {report['so2_mean_du']} | anomaly={report['so2_anomaly']}")
+    print(f"Latest JSON    : {latest_path.relative_to(PROJECT_ROOT)}")
+    print(f"History CSV    : {(CACHE_DIR / 'm5_nrt_history.csv').relative_to(PROJECT_ROOT)}")
+    print(f"Trend chart    : {chart_path.relative_to(PROJECT_ROOT)}")
 
 
 if __name__ == "__main__":

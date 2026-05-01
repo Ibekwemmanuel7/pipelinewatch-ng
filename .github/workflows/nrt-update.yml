@@ -41,6 +41,7 @@ jobs:
           EE_SERVICE_ACCOUNT: ${{ secrets.EE_SERVICE_ACCOUNT }}
           EE_PRIVATE_KEY: ${{ secrets.EE_PRIVATE_KEY }}
           EE_CREDENTIALS_JSON: ${{ secrets.EE_CREDENTIALS_JSON }}
+          PIPELINEWATCH_AOI: niger_delta
         run: |
           DAYS="${{ github.event.inputs.days || '7' }}"
           python modules/m5_nrt_update.py --days "$DAYS"

@@ -1,6 +1,9 @@
 """
 PipelineWatch-NG - Streamlit Dashboard
-Satellite-based crude oil theft monitoring, Niger Delta, Nigeria
+Satellite-based crude oil theft monitoring, configurable per AOI.
+
+Active AOI is controlled by the PIPELINEWATCH_AOI environment variable
+(see config/aois.yaml for available regions). Default is 'niger_delta'.
 
 Live demo: https://pipelinewatch-ng.streamlit.app
 GitHub:    https://github.com/Ibekwemmanuel7/pipelinewatch-ng
@@ -9,6 +12,7 @@ GitHub:    https://github.com/Ibekwemmanuel7/pipelinewatch-ng
 from datetime import datetime, timezone
 import json
 import os
+import sys
 
 import folium
 import pandas as pd
@@ -16,6 +20,18 @@ import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
 from streamlit_folium import st_folium
+
+# Make the project root importable so config.aois works whether streamlit
+# is launched from the project root or anywhere else.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from config.aois import get_active_aoi  # noqa: E402
+
+AOI_NAME, AOI = get_active_aoi()
+AOI_BOUNDS = AOI["bounds"]  # [west, south, east, north]
+AOI_RECT_FOLIUM = [
+    [AOI_BOUNDS[1], AOI_BOUNDS[0]],  # [south, west]
+    [AOI_BOUNDS[3], AOI_BOUNDS[2]],  # [north, east]
+]
 
 
 st.set_page_config(
@@ -91,8 +107,9 @@ with st.sidebar:
     st.caption("Near-real-time satellite crude oil theft monitoring")
     st.markdown("---")
     st.markdown("**Study area**")
-    st.markdown("Trans Niger Pipeline (TNP) corridor")
-    st.markdown("5.0-5.8 N, 6.5-7.2 E")
+    st.markdown(f"{AOI['full_name']}")
+    _w, _s, _e, _n = AOI_BOUNDS
+    st.markdown(f"{_s:.2f}-{_n:.2f} N, {_w:.2f}-{_e:.2f} E")
     st.markdown("---")
     st.markdown("**Monitoring mode**")
     st.markdown("Near-real-time rolling alert pipeline")
@@ -123,7 +140,7 @@ with st.sidebar:
 
 
 st.title("PipelineWatch-NG")
-st.markdown("#### Near-real-time satellite crude oil theft and pipeline monitoring - Niger Delta, Nigeria")
+st.markdown(f"#### Near-real-time satellite crude oil theft and pipeline monitoring - {AOI['full_name']}")
 st.markdown("---")
 
 n_high = int((df_risk["risk_tier"] == "HIGH").sum()) if not df_risk.empty else 0
@@ -235,7 +252,7 @@ tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
 
 with tab1:
     st.subheader("Combined Risk Score Map")
-    st.caption("XGBoost + Isolation Forest combined risk index over the TNP corridor")
+    st.caption(f"XGBoost + Isolation Forest combined risk index over the {AOI['short_name']}")
 
     layer_choice = st.selectbox(
         "Display layer",
@@ -247,14 +264,14 @@ with tab1:
         ],
     )
 
-    m = folium.Map(location=[5.40, 6.85], zoom_start=9, tiles="CartoDB dark_matter")
+    m = folium.Map(location=AOI["map_center"], zoom_start=AOI["map_zoom"], tiles="CartoDB dark_matter")
     folium.Rectangle(
-        bounds=[[5.00, 6.50], [5.80, 7.20]],
+        bounds=AOI_RECT_FOLIUM,
         color="#378ADD",
         fill=False,
         weight=2,
         dash_array="8 4",
-        tooltip="TNP corridor study area",
+        tooltip=f"{AOI['short_name']} study area",
     ).add_to(m)
 
     tier_colors = {"HIGH": "#E24B4A", "MEDIUM": "#EF9F27", "LOW": "#B5D4F4"}
@@ -336,9 +353,9 @@ with tab2:
     )
 
     if not df_clusters.empty:
-        m2 = folium.Map(location=[5.40, 6.85], zoom_start=9, tiles="CartoDB positron")
+        m2 = folium.Map(location=AOI["map_center"], zoom_start=AOI["map_zoom"], tiles="CartoDB positron")
         folium.Rectangle(
-            bounds=[[5.00, 6.50], [5.80, 7.20]],
+            bounds=AOI_RECT_FOLIUM,
             color="#185FA5",
             fill=False,
             weight=2,
@@ -615,10 +632,22 @@ The Niger Delta's mangrove creek terrain makes ground surveillance nearly imposs
 Existing commercial monitoring systems cost **$50,000-$500,000 per year**,
 placing them beyond the reach of Nigerian government agencies.
 
-PipelineWatch-NG is an open-source, multi-sensor, cloud-native pipeline for
-automated crude oil theft detection in the Niger Delta - deployable at zero cost.
+PipelineWatch-NG is a multi-sensor, cloud-native pipeline for automated
+crude oil theft detection - deployable at zero data cost via free public
+satellite missions.
 """
     )
+
+    st.markdown("**Active study area**")
+    st.markdown(f"- **{AOI['full_name']}** ({AOI.get('country', '')})")
+    if AOI.get("description"):
+        st.markdown(f"- {AOI['description'].strip()}")
+    _w, _s, _e, _n = AOI_BOUNDS
+    st.markdown(f"- Bounding box: {_s:.2f}-{_n:.2f} N, {_w:.2f}-{_e:.2f} E")
+    if AOI.get("major_pipelines"):
+        st.markdown("- Major pipelines covered: " + ", ".join(AOI["major_pipelines"]))
+    if AOI.get("major_terminals"):
+        st.markdown("- Major terminals covered: " + ", ".join(AOI["major_terminals"]))
 
     st.markdown("**Sensor stack**")
     sensor_df = pd.DataFrame(
@@ -637,12 +666,18 @@ automated crude oil theft detection in the Niger Delta - deployable at zero cost
     st.markdown("- DBSCAN spatial clustering - haversine metric, 5.5 km search radius")
     st.markdown("- Combined risk index - 0.6 x XGBoost + 0.4 x Isolation Forest")
 
-    st.markdown("**Key results**")
+    st.markdown("**Key results (TNP corridor pilot study)**")
     st.markdown("- 50 persistent thermal radiance hotspots detected over the TNP corridor (VIIRS)")
     st.markdown("- 8 DBSCAN cluster sites identified as candidate persistent combustion sources")
     st.markdown("- **6/8 clusters show co-located episodic SO₂ elevation (>3 DU)** consistent with crude burning, via TROPOMI dry-season validation")
     st.markdown("- 11,685 chronic SAR dark-spot pixels mapped (candidate oil-on-water signatures)")
     st.markdown("- 2 HIGH-risk zones identified at 5.637 N / 6.625 E and 5.727 N / 6.625 E")
+    if AOI_NAME != "tnp_corridor":
+        st.caption(
+            "Numbers above reflect the TNP corridor pilot study used to validate the methodology. "
+            f"Re-run Modules 1-3 against the active AOI ({AOI['short_name']}) to regenerate "
+            "region-specific results."
+        )
 
     st.markdown("**Target stakeholders**")
     st.markdown("- NNPC - Nigerian National Petroleum Corporation")

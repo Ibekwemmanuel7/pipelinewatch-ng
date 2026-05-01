@@ -1,0 +1,92 @@
+# PipelineWatch-NG Areas of Interest (AOIs)
+#
+# Each AOI is a named, self-contained configuration that drives:
+#   - the satellite data ingestion bounding box (Modules 1, 2, 3)
+#   - the near-real-time alert pipeline (Module 5 / m5_nrt_update.py)
+#   - the dashboard's map view, copy, and study area description (app.py)
+#   - the README's auto-generated study area section
+#
+# Switch the active AOI by setting the PIPELINEWATCH_AOI environment variable
+# (in GitHub Actions, locally, or in a .env file). Default is "niger_delta".
+#
+# Adding a new AOI later (Cabinda, Pemba, EACOP, etc.) is a YAML edit. Once
+# added, you re-run Modules 1-3 against the new bounds to regenerate the
+# cached analysis files, then the dashboard automatically reflects the new
+# region by setting PIPELINEWATCH_AOI=<new_name>.
+#
+# Bounds convention: [west, south, east, north] in decimal degrees.
+# This matches Google Earth Engine's ee.Geometry.Rectangle() argument order.
+
+niger_delta:
+  full_name: "Niger Delta region (South-South Nigeria)"
+  short_name: "Niger Delta"
+  country: "Nigeria"
+  bounds: [4.50, 4.20, 9.00, 7.00]
+  map_center: [5.60, 6.75]
+  map_zoom: 7
+  description: >
+    The six oil-producing states of Nigeria's South-South geopolitical zone:
+    Akwa Ibom, Bayelsa, Cross River, Delta, Edo, and Rivers. Mangrove creek
+    networks, swamp forest, and coastal terminals make ground surveillance
+    impractical across most of the corridor.
+  major_pipelines:
+    - "Trans Niger Pipeline (TNP)"
+    - "Nembe Creek Trunk Line (NCTL)"
+    - "Trans Forcados Pipeline"
+    - "Trans Escravos Pipeline"
+    - "Trans Ramos Pipeline"
+    - "Bonny Light / Brass / Qua Iboe trunk lines"
+  major_terminals:
+    - "Bonny"
+    - "Forcados"
+    - "Escravos"
+    - "Brass"
+    - "Qua Iboe"
+    - "Pennington"
+    - "Yoho"
+    - "Erha"
+  # Calibration constants - re-derive after first ingestion run.
+  baseline_thermal_hotspots: 50
+  baseline_weeks: 26
+  so2_threshold_du: 1.5
+  firms_brightness_k: 330.0
+
+tnp_corridor:
+  full_name: "Trans Niger Pipeline (TNP) corridor - sub-area"
+  short_name: "TNP corridor"
+  country: "Nigeria"
+  bounds: [6.50, 5.00, 7.20, 5.80]
+  map_center: [5.40, 6.85]
+  map_zoom: 9
+  description: >
+    Rumuekpe to Oguta to Bonny Terminal corridor in Rivers State. Original
+    study area, retained as a sub-region for high-resolution drilldown.
+  major_pipelines:
+    - "Trans Niger Pipeline (TNP)"
+  major_terminals:
+    - "Bonny"
+  baseline_thermal_hotspots: 50
+  baseline_weeks: 26
+  so2_threshold_du: 1.5
+  firms_brightness_k: 330.0
+
+# Future AOIs (placeholders - not active until calibrated and ingested):
+#
+# cabinda:
+#   full_name: "Cabinda Block (Angola)"
+#   short_name: "Cabinda"
+#   country: "Angola"
+#   bounds: [12.00, -5.80, 12.60, -4.40]
+#   ...
+#
+# pemba_lng:
+#   full_name: "Pemba LNG corridor (Cabo Delgado, Mozambique)"
+#   short_name: "Pemba LNG"
+#   country: "Mozambique"
+#   ...
+#
+# eacop:
+#   full_name: "East African Crude Oil Pipeline (Uganda - Tanzania)"
+#   short_name: "EACOP"
+#   country: "Uganda / Tanzania"
+#   ...

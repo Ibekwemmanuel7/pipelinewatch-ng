@@ -47,11 +47,27 @@ All data accessed via **Google Earth Engine** - no downloads, no storage costs. 
 
 ## Study area
 
-**Trans Niger Pipeline (TNP) corridor**
-Rumuekpe → Oguta → Bonny Terminal
-Bounding box: 5.0°–5.8°N, 6.5°–7.2°E
+**Active AOI: Niger Delta region (South-South Nigeria)**
+The six oil-producing states of Nigeria's South-South geopolitical zone -
+Akwa Ibom, Bayelsa, Cross River, Delta, Edo, Rivers - covering the Trans
+Niger Pipeline, Nembe Creek Trunk Line, Trans Forcados / Trans Escravos /
+Trans Ramos pipelines, and the major export terminals (Bonny, Forcados,
+Escravos, Brass, Qua Iboe, Pennington, Yoho, Erha).
+Bounding box: 4.20°-7.00°N, 4.50°-9.00°E.
 
-One of the highest crude oil theft corridors in Nigeria, traversing mangrove creek networks that make ground surveillance impractical.
+The original TNP corridor sub-area (5.0°-5.8°N, 6.5°-7.2°E) is retained
+as a higher-resolution drill-down zone and is the source of the validation
+results below.
+
+### Configurable AOIs
+
+The active AOI is defined in `config/aois.yaml` and selected via the
+`PIPELINEWATCH_AOI` environment variable. To target a different region
+(e.g. Cabinda Block, Pemba LNG corridor, EACOP), add an entry to
+`config/aois.yaml`, re-run Modules 1-3 against the new bounds to
+regenerate the cached analysis files, then set `PIPELINEWATCH_AOI=<name>`.
+The dashboard, NRT pipeline, and notebooks all read from the same
+config - region switching is a YAML edit, not a code change.
 
 ---
 
