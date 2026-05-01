@@ -19,3 +19,6 @@ venv/
 env/
 notebooks/notebooks/
 cleanup.ps1
+
+# Local reference materials from collaborators (keep out of public repo)
+references/
