@@ -1,12 +1,12 @@
 {
-  "run_date": "2026-04-30T19:51:14.317454+00:00",
-  "nrt_window": "2026-04-23 to 2026-04-30",
+  "run_date": "2026-05-01T04:18:19.950379+00:00",
+  "nrt_window": "2026-04-24 to 2026-05-01",
   "alert_level": "LOW",
   "fire_pixels": 0,
   "fire_anomaly": false,
   "baseline_weekly_avg": 1.923,
-  "so2_mean_du": 0.046,
-  "so2_max_du": 1.495,
+  "so2_mean_du": 0.045,
+  "so2_max_du": 1.016,
   "so2_anomaly": false,
   "firms_images": 7,
   "tropomi_images": 10
