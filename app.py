@@ -145,7 +145,7 @@ col4.metric(
         "mid-IR brightness temperature; persistent thermal anomalies are "
         "candidate combustion sources (illegal refinery flares, gas flares, "
         "vegetation burning, or other industrial heat). Not all hotspots are "
-        "fire — see About tab for the FIRMS disclaimer."
+        "fire - see About tab for the FIRMS disclaimer."
     ),
 )
 col5.metric(
@@ -154,7 +154,7 @@ col5.metric(
     delta="Thermal + SO₂",
     help=(
         "Thermal hotspot clusters whose locations also show episodic SO₂ "
-        "elevation in TROPOMI dry-season retrievals — the two-signature "
+        "elevation in TROPOMI dry-season retrievals - the two-signature "
         "pattern consistent with crude burning."
     ),
 )
@@ -204,13 +204,13 @@ else:
         unsafe_allow_html=True,
     )
     f2.markdown(
-        f"**Window**  \n{nrt.get('nrt_window', '—')}  \n"
+        f"**Window**  \n{nrt.get('nrt_window', '-')}  \n"
         f"<span style='color:#666;font-size:0.85em'>Rolling 7-day analysis</span>",
         unsafe_allow_html=True,
     )
     f3.markdown(
         f"**VIIRS thermal scenes**  \n{nrt.get('firms_images', 0)} in window  \n"
-        f"<span style='color:#666;font-size:0.85em'>Thermal radiance scenes via NASA FIRMS — written when anomalies present</span>",
+        f"<span style='color:#666;font-size:0.85em'>Thermal radiance scenes via NASA FIRMS - written when anomalies present</span>",
         unsafe_allow_html=True,
     )
     f4.markdown(
@@ -411,7 +411,7 @@ with tab3:
     st.markdown(
         """
 **Key finding:** 6 out of 8 thermal anomaly clusters show episodic SO₂ elevation
-> 3 Dobson Units during the dry season — the chemical signature consistent with
+> 3 Dobson Units during the dry season - the chemical signature consistent with
 illegal crude oil burning, layered on top of the thermal signal.
 
 **Why episodic?** Artisanal refineries burn intermittently (batch processing).
@@ -664,7 +664,7 @@ automated crude oil theft detection in the Niger Delta - deployable at zero cost
     st.info(
         "VIIRS thermal hotspots from NASA FIRMS measure mid-IR brightness temperature, "
         "not fire directly. Persistent thermal anomalies are *candidate* combustion "
-        "sources — they may also be agricultural burns, gas flares, volcanic activity, "
+        "sources - they may also be agricultural burns, gas flares, volcanic activity, "
         "or other industrial heat sources. Per the NASA / ESDIS terms of use, FIRMS "
         "data is provided 'as is' and is **not intended for tactical decision-making "
         "or local-scale conditions**. PipelineWatch-NG applies SO₂ co-location and SAR "
@@ -676,7 +676,7 @@ automated crude oil theft detection in the Niger Delta - deployable at zero cost
 
     st.markdown("**Data attribution**")
     st.markdown(
-        "- FIRMS / VIIRS active-fire data: NASA / ESDIS / LANCE — "
+        "- FIRMS / VIIRS active-fire data: NASA / ESDIS / LANCE - "
         "[NASA FIRMS](https://firms.modaps.eosdis.nasa.gov)"
     )
     st.markdown(

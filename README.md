@@ -1,6 +1,6 @@
 # PipelineWatch-NG
 
-**Satellite-based crude oil theft and pipeline monitoring — Niger Delta, Nigeria**
+**Satellite-based crude oil theft and pipeline monitoring - Niger Delta, Nigeria**
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://pipelinewatch-ng.streamlit.app)
 [![Python](https://img.shields.io/badge/Python-3.10-blue.svg)](https://python.org)
@@ -32,7 +32,7 @@ PipelineWatch-NG is the first open-source, multi-sensor, cloud-native pipeline f
 
 ## All-weather detection stack
 
-The pipeline is built around a deliberate separation between what each sensor *measures* (raw geophysical signal) and what those measurements *imply* (the operational indicator of interest). This separation matters because the underlying products carry well-documented limitations and disclaimers — see the FIRMS note in the [Data products and disclaimers](#data-products-and-disclaimers) section below.
+The pipeline is built around a deliberate separation between what each sensor *measures* (raw geophysical signal) and what those measurements *imply* (the operational indicator of interest). This separation matters because the underlying products carry well-documented limitations and disclaimers - see the FIRMS note in the [Data products and disclaimers](#data-products-and-disclaimers) section below.
 
 | Sensor | What it measures | First-order interpretation | Cloud-penetrating | Night-capable | Cost |
 |--------|----------------|----------------------------|:-----------------:|:-------------:|------|
@@ -41,7 +41,7 @@ The pipeline is built around a deliberate separation between what each sensor *m
 | TROPOMI SO₂ | UV column density of SO₂ | Episodic plume = chemical signature consistent with crude burning | ✅ UV backscatter | ❌ Daytime | Free |
 | Sentinel-2 MSI | Optical reflectance (NDVI, NDWI) | Vegetation dieback = candidate ROW contamination | ❌ Optical | ❌ Daytime | Free |
 
-All data accessed via **Google Earth Engine** — no downloads, no storage costs. Single-signature alerts are *candidates*; the pipeline raises confidence by requiring two or more independent signals to co-locate (e.g. persistent thermal anomaly + episodic SO₂ elevation).
+All data accessed via **Google Earth Engine** - no downloads, no storage costs. Single-signature alerts are *candidates*; the pipeline raises confidence by requiring two or more independent signals to co-locate (e.g. persistent thermal anomaly + episodic SO₂ elevation).
 
 ---
 
@@ -58,7 +58,7 @@ One of the highest crude oil theft corridors in Nigeria, traversing mangrove cre
 ## Module structure
 
 ```
-Module 1 — Data Ingestion
+Module 1 - Data Ingestion
   Sentinel-1 SAR (30 scenes), VIIRS thermal scenes via FIRMS (181), TROPOMI SO₂ (278)
   Output: GeoJSON feature collections, 50 persistent thermal anomaly hotspots detected
 
@@ -189,9 +189,9 @@ pipelinewatch-ng/
 
 ## Target stakeholders
 
-- **NNPC** — Nigerian National Petroleum Corporation
+- **NNPC** - Nigerian National Petroleum Corporation
 - **Nigerian Ministry of Petroleum Resources**
-- **International oil companies** — Shell, Chevron, TotalEnergies operating in Nigeria
+- **International oil companies** - Shell, Chevron, TotalEnergies operating in Nigeria
 - **World Bank / donor organisations** funding Niger Delta environmental monitoring
 
 ---
@@ -217,7 +217,7 @@ pipelinewatch-ng/
 
 - **SO₂ detection**: TROPOMI retrievals are cloud-masked during the Niger Delta wet season (Jun–Nov). Future work should test the Oct–Dec dry season window where SO₂ signals are cleaner.
 - **Ground truth**: No confirmed theft incident database exists for the TNP corridor. Weak proxy labels were used for ML training. Collaboration with NNPC field teams would enable supervised training.
-- **AIS vessel tracking**: Module 1 architecture includes AIS bunkering vessel detection — not yet implemented. MarineTraffic API integration is the next priority.
+- **AIS vessel tracking**: Module 1 architecture includes AIS bunkering vessel detection - not yet implemented. MarineTraffic API integration is the next priority.
 - **SAR speckle filtering**: Deferred from interactive notebooks due to memory constraints. A GEE Export Task approach in Module 2 will enable proper Lee filtering at scale.
 - **Temporal resolution**: Current pipeline runs on 6-month composites. A near-real-time weekly alert mode is feasible with the same architecture.
 
@@ -239,19 +239,19 @@ Operational risk tier (HIGH / MEDIUM / LOW)
 
 ### A note on FIRMS / VIIRS thermal data
 
-The VIIRS data accessed via NASA's Fire Information for Resource Management System (FIRMS) measures **mid-IR brightness temperature**, not fire directly. Persistent thermal anomalies are *candidate* combustion sources — they may also be agricultural burns, gas flares, volcanic activity, or other industrial heat sources. PipelineWatch-NG explicitly raises the confidence of a thermal anomaly only when a second independent signal (typically TROPOMI SO₂ co-location, or SAR change adjacent to the hotspot) supports the combustion interpretation.
+The VIIRS data accessed via NASA's Fire Information for Resource Management System (FIRMS) measures **mid-IR brightness temperature**, not fire directly. Persistent thermal anomalies are *candidate* combustion sources - they may also be agricultural burns, gas flares, volcanic activity, or other industrial heat sources. PipelineWatch-NG explicitly raises the confidence of a thermal anomaly only when a second independent signal (typically TROPOMI SO₂ co-location, or SAR change adjacent to the hotspot) supports the combustion interpretation.
 
 Per NASA / ESDIS terms of use, FIRMS data is provided **"as is"** and is **not intended for tactical decision-making or local-scale conditions**. Ground verification by qualified field teams is required before any operational action is taken on any alert produced by this system.
 
-Reference: [NASA FIRMS — VIIRS Active Fire data product description](https://firms.modaps.eosdis.nasa.gov/descriptions/FIRMS_VIIRS_Firehotspots.html)
+Reference: [NASA FIRMS - VIIRS Active Fire data product description](https://firms.modaps.eosdis.nasa.gov/descriptions/FIRMS_VIIRS_Firehotspots.html)
 
 ### A note on the 98.1% CV accuracy figure
 
-The XGBoost classifier reports 98.1% cross-validated accuracy against **weak proxy labels** derived from domain rules (not against ground-truth crude theft incidents). This number reflects internal model self-consistency, not confirmed real-world detection rate. Supervised retraining with a verified incident dataset — ideally from NNPC, IOC field teams, or Tantita Security operations — would be required before this figure could be claimed as operational accuracy.
+The XGBoost classifier reports 98.1% cross-validated accuracy against **weak proxy labels** derived from domain rules (not against ground-truth crude theft incidents). This number reflects internal model self-consistency, not confirmed real-world detection rate. Supervised retraining with a verified incident dataset - ideally from NNPC, IOC field teams, or Tantita Security operations - would be required before this figure could be claimed as operational accuracy.
 
 ### Data attribution
 
-- **FIRMS / VIIRS active-fire data**: NASA / ESDIS / LANCE — [NASA FIRMS](https://firms.modaps.eosdis.nasa.gov)
+- **FIRMS / VIIRS active-fire data**: NASA / ESDIS / LANCE - [NASA FIRMS](https://firms.modaps.eosdis.nasa.gov)
 - **Sentinel-1 SAR, Sentinel-2 MSI, Sentinel-5P TROPOMI**: ESA Copernicus Programme, accessed via Google Earth Engine
 - **Compute platform**: Google Earth Engine (free for noncommercial / research use)
 
@@ -261,6 +261,6 @@ The XGBoost classifier reports 98.1% cross-validated accuracy against **weak pro
 
 Copyright © 2024–2026 Emmanuel Ibekwe. All rights reserved.
 
-This project is licensed under the **PolyForm Noncommercial License 1.0.0** — see the `LICENSE` file for the full terms. In summary: you may view, run, and modify this code for non-commercial purposes (research, teaching, personal use, internal evaluation). You may **not** use it, in whole or in part, in any commercial product or service without a separate commercial license from the author.
+This project is licensed under the **PolyForm Noncommercial License 1.0.0** - see the `LICENSE` file for the full terms. In summary: you may view, run, and modify this code for non-commercial purposes (research, teaching, personal use, internal evaluation). You may **not** use it, in whole or in part, in any commercial product or service without a separate commercial license from the author.
 
 For commercial licensing, partnership inquiries, or pilot programs with national oil companies, 
