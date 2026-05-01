@@ -136,8 +136,28 @@ col1, col2, col3, col4, col5, col6 = st.columns(6)
 col1.metric("NRT alert", nrt_alert, delta=nrt_window)
 col2.metric("HIGH risk zones", str(n_high), delta="Model alerts")
 col3.metric("MEDIUM risk zones", str(n_medium), delta="Monitor")
-col4.metric("Fire hotspots (VIIRS)", str(n_fire), delta="Baseline detections")
-col5.metric("Confirmed sites", str(n_confirmed), delta="SO2 + fire")
+col4.metric(
+    "Thermal hotspots (VIIRS)",
+    str(n_fire),
+    delta="Baseline detections",
+    help=(
+        "VIIRS thermal radiance hotspots from NASA FIRMS. The sensor measures "
+        "mid-IR brightness temperature; persistent thermal anomalies are "
+        "candidate combustion sources (illegal refinery flares, gas flares, "
+        "vegetation burning, or other industrial heat). Not all hotspots are "
+        "fire — see About tab for the FIRMS disclaimer."
+    ),
+)
+col5.metric(
+    "Co-located sites",
+    str(n_confirmed),
+    delta="Thermal + SO₂",
+    help=(
+        "Thermal hotspot clusters whose locations also show episodic SO₂ "
+        "elevation in TROPOMI dry-season retrievals — the two-signature "
+        "pattern consistent with crude burning."
+    ),
+)
 col6.metric(
     "Model CV accuracy",
     f"{round(cv_acc * 100, 1)}%",
@@ -189,8 +209,8 @@ else:
         unsafe_allow_html=True,
     )
     f3.markdown(
-        f"**FIRMS / VIIRS detections**  \n{nrt.get('firms_images', 0)} in window  \n"
-        f"<span style='color:#666;font-size:0.85em'>Active-fire scenes only — 1 written per pass when fires present</span>",
+        f"**VIIRS thermal scenes**  \n{nrt.get('firms_images', 0)} in window  \n"
+        f"<span style='color:#666;font-size:0.85em'>Thermal radiance scenes via NASA FIRMS — written when anomalies present</span>",
         unsafe_allow_html=True,
     )
     f4.markdown(
@@ -204,8 +224,8 @@ st.markdown("---")
 tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
     [
         "Risk Map",
-        "Fire Clusters",
-        "SO2 Validation",
+        "Thermal Clusters",
+        "SO₂ Validation",
         "Feature Importance",
         "Alert Table",
         "About",
@@ -223,7 +243,7 @@ with tab1:
             "Risk tiers (HIGH / MEDIUM / LOW)",
             "Continuous risk score",
             "SAR dark spots",
-            "Fire hotspots (VIIRS)",
+            "Thermal hotspots (VIIRS)",
         ],
     )
 
@@ -283,7 +303,7 @@ with tab1:
                     tooltip=f"VV: {round(props.get('VV', 0), 2)} dB",
                 ).add_to(m)
 
-        elif layer_choice == "Fire hotspots (VIIRS)" and firms_gj:
+        elif layer_choice == "Thermal hotspots (VIIRS)" and firms_gj:
             for feat in firms_gj["features"]:
                 coords = feat["geometry"]["coordinates"]
                 props = feat["properties"]
@@ -308,8 +328,12 @@ with tab1:
 
 
 with tab2:
-    st.subheader("DBSCAN Fire Hotspot Clusters")
-    st.caption("50 VIIRS fire hotspots grouped into 8 candidate illegal refinery / flare sites")
+    st.subheader("DBSCAN Thermal Anomaly Clusters")
+    st.caption(
+        "50 persistent VIIRS thermal radiance hotspots grouped into 8 candidate "
+        "combustion sites (illegal refinery flares, gas flares, or vegetation burns) "
+        "via DBSCAN spatial clustering"
+    )
 
     if not df_clusters.empty:
         m2 = folium.Map(location=[5.40, 6.85], zoom_start=9, tiles="CartoDB positron")
@@ -382,22 +406,34 @@ with tab2:
 
 with tab3:
     st.subheader("TROPOMI Dry Season Validation")
-    st.caption("Oct-Dec 2023 | SO2 co-location with fire clusters")
+    st.caption("Oct-Dec 2023 | SO₂ co-location with thermal anomaly clusters")
 
     st.markdown(
         """
-**Key finding:** 6 out of 8 fire clusters show episodic SO2 elevation > 3 Dobson Units
-during the dry season - the chemical fingerprint of illegal crude oil burning.
+**Key finding:** 6 out of 8 thermal anomaly clusters show episodic SO₂ elevation
+> 3 Dobson Units during the dry season — the chemical signature consistent with
+illegal crude oil burning, layered on top of the thermal signal.
 
 **Why episodic?** Artisanal refineries burn intermittently (batch processing).
 TROPOMI captures background on most days but spikes of 3-5+ DU on active burn days.
 This low-mean / high-max pattern is the expected signature for intermittent sources.
+The dual signature (persistent thermal anomaly + episodic SO₂) is what raises a
+cluster from "candidate" to "high-confidence combustion source."
 """
     )
 
     if not df_val.empty:
         n_conf = int(df_val["SO2_confirmed"].sum()) if "SO2_confirmed" in df_val else 0
-        st.metric("Confirmed refinery candidates", f"{n_conf} / {len(df_val)}", delta="Fire + SO2 co-located")
+        st.metric(
+            "Dual-signature candidates",
+            f"{n_conf} / {len(df_val)}",
+            delta="Thermal + SO₂ co-located",
+            help=(
+                "Clusters where a persistent thermal anomaly co-locates with "
+                "episodic SO₂ elevation > 3 DU. The combination is consistent "
+                "with crude burning but still requires ground verification."
+            ),
+        )
 
         fig = go.Figure()
         bar_colors = ["#E24B4A" if bool(v) else "#B5D4F4" for v in df_val["SO2_confirmed"]]
@@ -424,7 +460,7 @@ This low-mean / high-max pattern is the expected signature for intermittent sour
         fig.add_hline(y=1.5, line_dash="dash", line_color="#854F0B", annotation_text="Mean threshold (1.5 DU)")
         fig.add_hline(y=3.0, line_dash="dot", line_color="#E24B4A", annotation_text="Episodic threshold (3.0 DU)")
         fig.update_layout(
-            title="SO2 per fire cluster (Oct-Dec 2023 dry season)",
+            title="SO₂ per thermal anomaly cluster (Oct-Dec 2023 dry season)",
             yaxis_title="SO2 (Dobson Units)",
             height=400,
             barmode="group",
@@ -587,10 +623,10 @@ automated crude oil theft detection in the Niger Delta - deployable at zero cost
     st.markdown("**Sensor stack**")
     sensor_df = pd.DataFrame(
         [
-            {"Sensor": "Sentinel-1 SAR", "Signal": "Oil spill dark spots", "Cloud-free": "Yes", "Night": "Yes", "Cost": "Free"},
-            {"Sensor": "FIRMS/VIIRS", "Signal": "Illegal refinery fire hotspots", "Cloud-free": "Yes", "Night": "Yes", "Cost": "Free"},
-            {"Sensor": "TROPOMI SO2", "Signal": "Chemical plumes (crude burning)", "Cloud-free": "Partial", "Night": "No", "Cost": "Free"},
-            {"Sensor": "Sentinel-2 MSI", "Signal": "Vegetation dieback along ROW", "Cloud-free": "No", "Night": "No", "Cost": "Free"},
+            {"Sensor": "Sentinel-1 SAR", "Measures": "C-band radar backscatter", "Interpretation": "Dark spots on water = candidate oil slick", "Cloud-free": "Yes", "Night": "Yes", "Cost": "Free"},
+            {"Sensor": "VIIRS (FIRMS)", "Measures": "Mid-IR thermal radiance", "Interpretation": "Persistent thermal anomaly = candidate combustion source", "Cloud-free": "Yes", "Night": "Yes", "Cost": "Free"},
+            {"Sensor": "TROPOMI SO₂", "Measures": "UV column density of SO₂", "Interpretation": "Episodic plume = chemical fingerprint of crude burning", "Cloud-free": "Partial", "Night": "No", "Cost": "Free"},
+            {"Sensor": "Sentinel-2 MSI", "Measures": "Optical reflectance (NDVI/NDWI)", "Interpretation": "Vegetation dieback = candidate ROW contamination", "Cloud-free": "No", "Night": "No", "Cost": "Free"},
         ]
     )
     st.dataframe(sensor_df, width="stretch", hide_index=True)
@@ -602,17 +638,52 @@ automated crude oil theft detection in the Niger Delta - deployable at zero cost
     st.markdown("- Combined risk index - 0.6 x XGBoost + 0.4 x Isolation Forest")
 
     st.markdown("**Key results**")
-    st.markdown("- 50 persistent fire hotspots detected over the TNP corridor")
-    st.markdown("- 8 DBSCAN cluster sites identified")
-    st.markdown("- **6/8 clusters show co-located episodic SO2 elevation (>3 DU)** consistent with crude burning, via TROPOMI dry-season validation")
-    st.markdown("- 11,685 chronic SAR spill pixels mapped")
-    st.markdown("- 2 HIGH-risk zones at 5.637 N/6.625 E and 5.727 N/6.625 E")
+    st.markdown("- 50 persistent thermal radiance hotspots detected over the TNP corridor (VIIRS)")
+    st.markdown("- 8 DBSCAN cluster sites identified as candidate persistent combustion sources")
+    st.markdown("- **6/8 clusters show co-located episodic SO₂ elevation (>3 DU)** consistent with crude burning, via TROPOMI dry-season validation")
+    st.markdown("- 11,685 chronic SAR dark-spot pixels mapped (candidate oil-on-water signatures)")
+    st.markdown("- 2 HIGH-risk zones identified at 5.637 N / 6.625 E and 5.727 N / 6.625 E")
 
     st.markdown("**Target stakeholders**")
     st.markdown("- NNPC - Nigerian National Petroleum Corporation")
     st.markdown("- Nigerian Ministry of Petroleum Resources")
     st.markdown("- International oil companies: Shell, Chevron, TotalEnergies")
     st.markdown("- World Bank / donor organisations")
+
+    st.markdown("**Data products and interpretation chain**")
+    st.markdown(
+        "PipelineWatch-NG consumes raw geophysical measurements and applies "
+        "domain-rule interpretation layers to produce risk indicators. The chain is:"
+    )
+    st.markdown("- **Sensor measurement** → what the satellite physically records")
+    st.markdown("- **Thermal anomaly / SAR dark spot / SO₂ column** → first-order interpretation of the radiance or backscatter signal")
+    st.markdown("- **Candidate combustion / oil signature** → cross-checked when two or more independent signals co-locate")
+    st.markdown("- **Risk tier (HIGH / MEDIUM / LOW)** → final operational alert, derived from the combined signal index")
+
+    st.markdown("**Important disclaimer on FIRMS / VIIRS thermal data**")
+    st.info(
+        "VIIRS thermal hotspots from NASA FIRMS measure mid-IR brightness temperature, "
+        "not fire directly. Persistent thermal anomalies are *candidate* combustion "
+        "sources — they may also be agricultural burns, gas flares, volcanic activity, "
+        "or other industrial heat sources. Per the NASA / ESDIS terms of use, FIRMS "
+        "data is provided 'as is' and is **not intended for tactical decision-making "
+        "or local-scale conditions**. PipelineWatch-NG applies SO₂ co-location and SAR "
+        "cross-checks to raise candidate hotspots to higher-confidence alerts, but "
+        "ground verification by field teams is required before any operational action.\n\n"
+        "Reference: [NASA FIRMS VIIRS Active Fire documentation]"
+        "(https://firms.modaps.eosdis.nasa.gov/descriptions/FIRMS_VIIRS_Firehotspots.html)"
+    )
+
+    st.markdown("**Data attribution**")
+    st.markdown(
+        "- FIRMS / VIIRS active-fire data: NASA / ESDIS / LANCE — "
+        "[NASA FIRMS](https://firms.modaps.eosdis.nasa.gov)"
+    )
+    st.markdown(
+        "- Sentinel-1 SAR, Sentinel-2 MSI, Sentinel-5P TROPOMI: "
+        "ESA Copernicus Programme, accessed via Google Earth Engine"
+    )
+    st.markdown("- Compute: Google Earth Engine (free for noncommercial / research use)")
 
     st.markdown("---")
     st.markdown(
