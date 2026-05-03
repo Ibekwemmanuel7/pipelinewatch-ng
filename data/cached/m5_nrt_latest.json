@@ -1,6 +1,6 @@
 {
-  "run_date": "2026-05-02T19:18:36.396254+00:00",
-  "nrt_window": "2026-04-25 to 2026-05-02",
+  "run_date": "2026-05-03T04:12:10.748560+00:00",
+  "nrt_window": "2026-04-26 to 2026-05-03",
   "aoi_name": "niger_delta",
   "aoi_full_name": "Niger Delta region (South-South Nigeria)",
   "aoi_country": "Nigeria",
@@ -11,12 +11,12 @@
     7.0
   ],
   "alert_level": "MEDIUM",
-  "fire_pixels": 125,
+  "fire_pixels": 90,
   "fire_anomaly": true,
   "baseline_weekly_avg": 1.923,
-  "so2_mean_du": -0.013,
-  "so2_max_du": 1.443,
+  "so2_mean_du": -0.006,
+  "so2_max_du": 1.094,
   "so2_anomaly": false,
-  "firms_images": 7,
-  "tropomi_images": 11
+  "firms_images": 6,
+  "tropomi_images": 10
 }
