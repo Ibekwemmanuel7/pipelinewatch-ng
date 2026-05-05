@@ -5,3 +5,4 @@ date,fire_pixels,so2_mean_du,so2_max_du,alert_level,fire_anomaly,so2_anomaly,fir
 2026-05-02,125,-0.013,1.443,MEDIUM,True,False,7,11
 2026-05-03,90,-0.009,1.094,MEDIUM,True,False,7,13
 2026-05-04,90,-0.006,1.094,MEDIUM,True,False,7,11
+2026-05-05,90,-0.003,1.094,MEDIUM,True,False,6,12
