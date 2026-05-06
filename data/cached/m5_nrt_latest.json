@@ -1,5 +1,5 @@
 {
-  "run_date": "2026-05-06T04:06:16.051659+00:00",
+  "run_date": "2026-05-06T14:47:41.404637+00:00",
   "nrt_window": "2026-04-29 to 2026-05-06",
   "aoi_name": "niger_delta",
   "aoi_full_name": "Niger Delta region (South-South Nigeria)",
@@ -17,6 +17,6 @@
   "so2_mean_du": -0.008,
   "so2_max_du": 1.094,
   "so2_anomaly": false,
-  "firms_images": 6,
+  "firms_images": 7,
   "tropomi_images": 12
 }
